@@ -562,8 +562,10 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 
   <div class="sections" id="sections"></div>
 
-  <div class="footer">Fait avec ❤️ pour Bruno & Élodie</div>
-
+  <div class="footer">
+    Fait avec ❤️ pour Bruno & Élodie<br>
+    <span style="opacity:0.6">v<span id="app-version"></span> · Prismora Solutions 2026</span>
+  </div>
 </div>
 
 <button class="fab" onclick="openAddModal()">+</button>
@@ -641,8 +643,8 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 <!-- MODAL QUI ES-TU -->
 <div class="who-overlay" id="who-overlay">
   <div class="who-modal">
-    <div class="who-title">✦ Bienvenue ✦</div>
-    <div class="who-sub">Qui es-tu ?</div>
+    <div class="who-title">Last Minute Wedding</div>
+    <div class="who-sub">✦ Bienvenue · Qui es-tu ? ✦</div>
     <div class="who-list">
       <button class="who-btn" onclick="selectUser('Milkhit','🤘')">
         <span class="who-btn-emoji">🤘</span>
@@ -673,10 +675,14 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
       <input class="who-other-input" id="who-other-input" placeholder="Ton prénom…" onkeydown="if(event.key==='Enter')confirmOtherUser()">
       <button class="who-other-confirm" onclick="confirmOtherUser()">OK</button>
     </div>
+    <div style="margin-top:20px;font-size:10px;color:var(--text-soft);text-align:center;letter-spacing:1px;line-height:1.8">
+      v<span id="who-version"></span><br>Prismora Solutions 2026
+    </div>
   </div>
 </div>
 
 <script>
+const APP_VERSION = "0.8.0";
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbylvUV9sZLQ4JAkJ0Y7OxirqZ4_-9QyBkiDqgd-erXij5kLuTDbGOKr3KMTpzFPy4cWpA/exec";
 
 let db = [];
@@ -802,6 +808,10 @@ function render() {
       el.style.height = el.scrollHeight + 'px';
     });
   }, 50);
+  const vEl = document.getElementById('app-version');
+  if (vEl) vEl.textContent = APP_VERSION;
+  const wEl = document.getElementById('who-version');
+  if (wEl) wEl.textContent = APP_VERSION;
 }
 
 function typeIcon(type) {
