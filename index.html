@@ -1495,6 +1495,7 @@ function navSection(dir) {
 load();
 render();
 pullFromSheets().then(() => { render(); renderSuggestions(); });
+setInterval(() => pullFromSheets().then(() => { render(); renderSuggestions(); }), 30000);
 initUser();
 document.addEventListener('input', e => {
   if (e.target.classList.contains('note-input')) {
