@@ -881,10 +881,15 @@ function isEditor() {
 }
 
 // ── STORAGE ──
-function save() { localStorage.setItem('mariage_be_v3', JSON.stringify(db)); }
+function save() {
+  localStorage.setItem('mariage_be_v3', JSON.stringify(db));
+  localStorage.setItem('mariage_sugg_v1', JSON.stringify(suggestions));
+}
 function load() {
   const s = localStorage.getItem('mariage_be_v3');
   if (s) { try { db = JSON.parse(s); } catch(e){} }
+  const sg = localStorage.getItem('mariage_sugg_v1');
+  if (sg) { try { suggestions = JSON.parse(sg); } catch(e){} }
 }
 function setSyncMsg(msg, cls='') {
   const el = document.getElementById('sync');
@@ -897,6 +902,7 @@ async function pushToSheets(payload) {
   setSyncMsg('⟳ Synchronisation…', 'syncing');
   try {
     const body = payload || { sections: db };
+    if (body.sections && body.sections.length === 0) return; // sécurité anti-effacement
     await fetch(SHEETS_URL, {
       method: 'POST', mode: 'no-cors',
       body: JSON.stringify(body),
