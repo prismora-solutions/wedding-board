@@ -978,7 +978,7 @@ function changeStatut(secId, itemId, val) {
 
 function quickSave(secId, itemId, field, value) {
   findItem(secId, itemId)[field] = value;
-  save(); pushToSheets();
+  save(); pushToSheets(); render();
 }
 
 function deleteItem(secId, itemId) {
