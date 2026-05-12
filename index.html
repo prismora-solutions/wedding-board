@@ -1019,15 +1019,15 @@ function renderComments(it, secId) {
       </div>`).join('');
 
   return `
+    <div class="item-action-bar">
+      ${isEditor() ? `<button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>` : ''}
+      <button class="${btnClass}" id="btn-comment-${it.id}" onclick="toggleCommentInput('${it.id}')">${btnLabel}</button>
+    </div>
     ${count > 0 ? `
     <div class="comments-section" id="comments-${it.id}">
       <span class="comments-toggle" onclick="toggleComments('${it.id}')">▾ ${count} commentaire${count>1?'s':''}</span>
       <div class="comments-list" id="comments-list-${it.id}">${commentsHtml}</div>
     </div>` : ''}
-    <div class="item-action-bar">
-      ${isEditor() ? `<button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>` : ''}
-      <button class="${btnClass}" id="btn-comment-${it.id}" onclick="toggleCommentInput('${it.id}')">${btnLabel}</button>
-    </div>
     <div class="comment-input-row" id="comment-input-${it.id}">
       <input class="comment-input" id="comment-text-${it.id}" placeholder="Votre commentaire…" onkeydown="if(event.key==='Enter')submitComment('${secId}','${it.id}')">
       <button class="btn-comment-send" onclick="submitComment('${secId}','${it.id}')">Envoyer</button>
