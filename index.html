@@ -2005,7 +2005,7 @@ function initUser() {
 }
 // ── INIT ──
 load();
-render();
+setView('board', document.getElementById('nav-board'));
 pullFromSheets().then(() => { render(); renderSuggestions(); if (currentUser) showUserBadge(); });
 setInterval(() => {
   if (document.activeElement && document.activeElement.tagName.match(/INPUT|TEXTAREA|SELECT/)) return;
