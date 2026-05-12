@@ -186,11 +186,15 @@ body {
 }
 
 @media (min-width: 768px) {
-  .item-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; }
-  .field-group-3 { display: contents; }
+  .item-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 0; align-items: start; }
+  .field-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); grid-column: span 3; }
+  .field-row-3 .field-col { padding: 6px 12px; border-right: 1px solid var(--border-soft); }
+  .field-row-3 .field-col:last-child { border-right: none; }
   .field-group-2 { grid-column: span 2; }
   .field-full { grid-column: span 3; }
 }
+
+input[type="date"], input[type="time"] { text-align: left; }
 
 /* Indicateur champs remplis sur la ligne fermée */
 .item-preview {
