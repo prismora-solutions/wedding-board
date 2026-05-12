@@ -1354,9 +1354,9 @@ function renderSuggestions() {
           </div>
           <div class="sugg-card-text">${s.texte}</div>
           <div class="sugg-card-actions">
-            ${isEditor() ? `<button class="btn-sugg-convert" onclick="convertSuggestion('${s.id}','${cat}','${s.texte.replace(/'/g,"\'")}')">→ Créer une tâche</button>` : ''}
+            ${isEditor() ? `<button class="btn-sugg-convert" onclick="convertSuggestion('${s.id}')">→ Créer une tâche</button>` : ''}
             ${canEdit(s) ? `
-              <button class="btn-sugg-edit" onclick="editSuggestion('${s.id}','${cat}','${s.texte.replace(/'/g,"\'")}')">✏️</button>
+              <button class="btn-sugg-edit" onclick="editSuggestion('${s.id}')">✏️</button>
               <button class="btn-sugg-del" onclick="deleteSuggestion('${s.id}')">🗑️</button>
             ` : ''}
           </div>
@@ -1418,21 +1418,23 @@ async function deleteSuggestion(id) {
   renderSuggestions();
 }
 
-function editSuggestion(id, cat, texte) {
-  openSuggModal(id, cat, texte);
+function editSuggestion(id) {
+  const s = suggestions.find(x => x.id === id);
+  if (!s) return;
+  openSuggModal(s.id, s.categorie, s.texte);
 }
 
-function convertSuggestion(id, cat, texte) {
-  // Ouvre le modal d'ajout pré-rempli avec le texte de la suggestion
+function convertSuggestion(id) {
+  const s = suggestions.find(x => x.id === id);
+  if (!s) return;
   setView('board', document.getElementById('nav-board'));
   openAddModal();
-  // Trouver la section correspondante
-  const sec = db.find(s => s.name === cat);
+  const sec = db.find(x => x.name === s.categorie);
   if (sec) document.getElementById('af-section').value = sec.id;
-  document.getElementById('af-label').value = texte.substring(0, 80);
-  document.getElementById('af-note').value  = 'Issu d\'une suggestion de ' + (suggestions.find(s=>s.id===id)?.user||'');
+  document.getElementById('af-label').value = (s.texte||'').substring(0, 80);
+  document.getElementById('af-note').value  = 'Issu d\'une suggestion de ' + (s.user||'');
 }
-
+  
 async function pullSuggestions() {
   try {
     const r = await fetch(SHEETS_URL + '?action=getSugg&t=' + Date.now());
