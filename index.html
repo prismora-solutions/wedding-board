@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Bruno & Élodie · 27 juin 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f7f2ea;
+  --parchment: #ede5d4;
+  --warm: #faf6ef;
+  --terra: #b85c38;
+  --terra-soft: #d4846a;
+  --terra-pale: #f0d5cb;
+  --sage: #6b8f71;
+  --sage-soft: #9ab89f;
+  --sage-pale: #d8ead9;
+  --brown: #5c3d2e;
+  --brown-mid: #8a6352;
+  --brown-light: #b8967e;
+  --text: #332820;
+  --text-mid: #6b5242;
+  --text-soft: #9e8272;
+  --border: #ddd0bc;
+  --border-soft: #ece5d6;
+  --red: #b03a2e;
+  --orange: #ca6f1e;
+  --yellow: #b7950b;
+  --shadow-sm: 0 2px 8px rgba(92,61,46,0.08);
+  --shadow-md: 0 4px 20px rgba(92,61,46,0.12);
+}
+
+.page-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--cream);
+  min-height: 100vh;
+  box-shadow: 0 0 60px rgba(92,61,46,0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: #e8e0d0;
+  font-family: 'Jost', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--brown);
+  padding: 36px 20px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 20px;
+  background: var(--cream);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.header-leaves { font-size: 22px; margin-bottom: 10px; opacity: 0.6; letter-spacing: 8px; }
+.header h1 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 400; color: var(--cream); letter-spacing: 2px; }
+.header h1 em { font-style: italic; color: var(--terra-soft); }
+.header-sub { margin-top: 8px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--brown-light); font-weight: 300; }
+.header-countdown { display: inline-block; margin-top: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 16px; font-size: 12px; color: var(--terra-soft); letter-spacing: 1px; }
+
+/* ── PROGRESS ── */
+.progress-wrap { padding: 20px 16px 12px; }
+.progress-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.progress-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-soft); }
+.progress-pct { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--brown); }
+.progress-track { height: 6px; background: var(--border); border-radius: 10px; overflow: visible; position: relative; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--sage) 0%, var(--terra-soft) 100%); border-radius: 10px; transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+.progress-groom { position: absolute; top: 50%; transform: translateY(-50%); font-size: 18px; transition: left 0.6s cubic-bezier(.4,0,.2,1); z-index: 10; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); }
+.progress-bride { position: absolute; top: 50%; right: -4px; transform: translateY(-50%); font-size: 18px; z-index: 10; line-height: 1; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); }
+.stats-row { display: flex; gap: 8px; margin-top: 12px; }
+.stat-pill { flex: 1; background: var(--warm); border: 1px solid var(--border-soft); border-radius: 10px; padding: 10px 8px; text-align: center; }
+.stat-pill-num { font-family: 'Cormorant Garamond', serif; font-size: 24px; line-height: 1; display: block; }
+.stat-pill-num.c-done { color: var(--sage); }
+.stat-pill-num.c-red  { color: var(--red); }
+.stat-pill-num.c-tot  { color: var(--brown); }
+.stat-pill-label { font-size: 10px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; display: block; }
+
+/* ── TOOLBAR ── */
+.toolbar { padding: 10px 16px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: var(--warm); }
+.f-btn { padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--border); background: transparent; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; color: var(--text-soft); cursor: pointer; transition: all 0.18s; letter-spacing: 0.5px; }
+.f-btn.on { background: var(--brown); color: var(--cream); border-color: var(--brown); }
+
+/* ── SECTIONS ── */
+.sections { padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+.sec { background: var(--warm); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
+.sec-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; user-select: none; }
+.sec-emoji { font-size: 18px; flex-shrink: 0; }
+.sec-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; flex: 1; color: var(--brown); }
+.sec-badge { font-size: 10px; color: var(--text-soft); background: var(--parchment); border: 1px solid var(--border); border-radius: 20px; padding: 2px 8px; }
+.sec-arrow { font-size: 10px; color: var(--text-soft); transition: transform 0.22s; }
+.sec.open .sec-arrow { transform: rotate(180deg); }
+.sec-body { display: none; }
+.sec.open .sec-body { display: block; }
+
+/* ── ITEM ── */
+.item { border-top: 1px solid var(--border-soft); }
+.item-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+}
+.item-top:active { background: var(--parchment); }
+.urgency-pip { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.pip-red    { background: var(--red); }
+.pip-orange { background: var(--orange); }
+.pip-yellow { background: var(--yellow); }
+.pip-none   { background: var(--border); }
+.item-label { flex: 1; font-size: 13.5px; font-weight: 500; line-height: 1.3; color: var(--text); }
+.item-label.done-label { text-decoration: line-through; color: var(--text-soft); }
+.status-sel { background: transparent; border: none; font-size: 17px; cursor: pointer; flex-shrink: 0; padding: 2px; line-height: 1; }
+.item-chevron { font-size: 10px; color: var(--text-soft); transition: transform 0.2s; flex-shrink: 0; padding: 2px 4px; }
+.item.expanded .item-chevron { transform: rotate(180deg); }
+.item-actions { display: flex; gap: 0; }
+.btn-action { background: none; border: none; cursor: pointer; font-size: 14px; opacity: 0.35; padding: 2px 4px; flex-shrink: 0; }
+.btn-action:hover { opacity: 0.7; }
+
+/* ── FIELDS (collapsed par défaut) ── */
+.item-body {
+  display: block;
+  padding: 0 14px 12px 14px;
+  border-top: 1px solid var(--border-soft);
+  background: var(--cream);
+}
+
+.item-fields { display: flex; flex-direction: column; gap: 6px; padding-top: 10px; }
+.field-row { display: flex; align-items: flex-start; gap: 8px; }
+.field-icon { font-size: 13px; flex-shrink: 0; width: 18px; text-align: center; color: var(--text-soft); margin-top: 6px; }
+.field-label-txt { font-size: 11px; color: var(--text-soft); min-width: 72px; flex-shrink: 0; margin-top: 6px; }
+
+/* Valeur affichée (lecture) */
+.field-val-display {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text);
+  padding: 4px 0;
+  line-height: 1.4;
+}
+.field-val-display.empty { color: var(--border); font-style: italic; font-size: 12px; }
+
+/* Input éditable */
+.field-input {
+  flex: 1;
+  max-width: 340px;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  background: white;
+  color: var(--text);
+  text-align: left;
+}
+.field-input:focus { outline: none; border-color: var(--terra-soft); background: white; }
+.field-input.note-input {
+  resize: none;
+  overflow: hidden;
+  min-height: 32px;
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .field-input { max-width: 100%; }
+}
+@media (min-width: 768px) {
+  .field-input { max-width: 340px; }
+  .field-input.note-input { max-width: 100%; }
+}
+
+/* Indicateur champs remplis sur la ligne fermée */
+.item-preview {
+  flex: 1;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+}
+.item-preview-tag {
+  font-size: 10px;
+  color: var(--text-soft);
+  background: var(--parchment);
+  border-radius: 10px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+/* ── SYNC ── */
+.sync-strip { text-align: center; font-size: 10px; letter-spacing: 1px; padding: 7px; color: var(--text-soft); background: var(--warm); border-bottom: 1px solid var(--border-soft); text-transform: uppercase; }
+.sync-strip.syncing { color: var(--terra); }
+.sync-strip.ok { color: var(--sage); }
+
+/* ── FOOTER ── */
+.footer { text-align: center; padding: 28px 20px 40px; font-size: 11px; color: var(--text-soft); font-style: italic; }
+
+input[type="date"]:not(.has-val)::-webkit-datetime-edit { color: transparent; }
+input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
+
+/* ── MODAL QUI ES-TU ── */
+.who-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(51,40,32,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.who-overlay.show { display: flex; }
+.who-modal {
+  background: var(--warm);
+  border-radius: 20px;
+  padding: 28px 20px 24px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+@media (min-width: 768px) {
+  .who-modal { max-width: 280px; }
+}
+.who-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  color: var(--brown);
+  margin-bottom: 6px;
+}
+.who-sub {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 24px;
+}
+.who-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.who-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.who-btn:hover { border-color: var(--terra); background: var(--terra-pale); }
+.who-btn-emoji { font-size: 22px; flex-shrink: 0; }
+.who-btn-name { flex: 1; font-weight: 500; }
+.who-btn-handle { font-size: 11px; color: var(--text-soft); }
+.who-other-row {
+  display: none;
+  gap: 8px;
+  margin-top: 4px;
+}
+.who-other-row.show { display: flex; }
+.who-other-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  background: var(--cream);
+  color: var(--text);
+}
+.who-other-input:focus { outline: none; border-color: var(--terra); }
+.who-other-confirm {
+  padding: 10px 16px;
+  background: var(--terra);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ── USER BADGE HEADER ── */
+.header-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--terra-soft);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+.header-user:hover { background: rgba(255,255,255,0.18); }
+
+.comment-edit-row { display:flex; flex-direction:column; gap:4px; }
+.comment-edit-row.hidden { display:none !important; }
+
+.hidden { display: none !important; }
+
+/* ── ITEM BODY ── */
+.field-row-hidden { display: none; }
+.field-row-empty .field-icon,
+.field-row-empty .field-label-txt { opacity: 0.5; }
+.field-row-empty .field-input { background: white; color: var(--text-soft); }
+.field-row-empty .field-input::placeholder { color: var(--border); }
+
+/* ── BARRE ACTION ── */
+.item-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 4px 0;
+  gap: 8px;
+}
+.btn-expand-fields {
+  font-size: 11px;
+  color: var(--text-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.btn-expand-fields:hover { color: var(--terra); }
+
+.btn-comment {
+  font-size: 11px;
+  color: var(--text-soft);
+  background: var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-comment:hover { background: var(--border); }
+.btn-comment.has-comments { color: var(--brown); border-color: var(--brown-light); }
+
+/* ── FIL COMMENTAIRES ── */
+.comments-section {
+  margin-top: 8px;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 8px;
+}
+.comments-toggle {
+  font-size: 10px;
+  color: var(--text-soft);
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  user-select: none;
+  display: block;
+  margin-bottom: 6px;
+}
+.comments-toggle:hover { color: var(--terra); }
+.comments-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.comment-bubble {
+  background: var(--parchment);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.comment-author {
+  font-weight: 500;
+  color: var(--brown);
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+.comment-date { font-size: 10px; color: var(--text-soft); float: right; }
+.comment-input-row {
+  display: none;
+  gap: 6px;
+  margin-top: 6px;
+}
+.comment-input-row.show { display: flex; }
+.comment-input {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  background: white;
+  color: var(--text);
+  min-width: 0;
+}
+.comment-input:focus { outline: none; border-color: var(--terra-soft); }
+.btn-comment-send {
+  padding: 7px 14px;
+  background: var(--terra);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .item-action-bar { flex-wrap: wrap; }
+  .field-input { max-width: 100%; }
+}
+
+/* ── BOUTON FAB ── */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: calc(50% - 430px + 20px);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--terra);
+  color: white;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(184,92,56,0.45);
+  z-index: 150;
+  border: none;
+  transition: transform 0.15s;
+  user-select: none;
+}
+.fab:active { transform: scale(0.92); }
+@media (max-width: 860px) { .fab { right: 20px; } }
+
+/* ── MODAL AJOUT ── */
+.add-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(51,40,32,0.55);
+  backdrop-filter: blur(3px);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.add-overlay.show { display: flex; }
+.add-modal {
+  background: var(--warm);
+  border-radius: 20px 20px 0 0;
+  padding: 20px 20px 36px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 -4px 30px rgba(92,61,46,0.15);
+}
+.add-modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 4px; margin: 0 auto 14px; }
+.add-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--brown); margin-bottom: 16px; text-align: center; }
+.add-form-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.add-form-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); }
+.add-form-input, .add-form-select {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 9px;
+  font-family: 'Jost', sans-serif; font-size: 13px; background: var(--cream); color: var(--text);
+}
+.add-form-input:focus, .add-form-select:focus { outline: none; border-color: var(--terra-soft); }
+.add-form-textarea {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 9px;
+  font-family: 'Jost', sans-serif; font-size: 13px; background: var(--cream); color: var(--text);
+  resize: none; min-height: 60px;
+}
+.add-form-textarea:focus { outline: none; border-color: var(--terra-soft); }
+.add-newsec-row { display: none; flex-direction: column; gap: 6px; margin-top: 6px; }
+.add-newsec-row.show { display: flex; }
+.add-newsec-inline { display: flex; gap: 6px; }
+.add-form-btns { display: flex; gap: 10px; margin-top: 16px; }
+.btn-add-confirm { flex: 1; padding: 13px; background: var(--terra); color: white; border: none; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; }
+.btn-add-cancel { padding: 13px 20px; background: var(--parchment); color: var(--text-mid); border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; }
+
+/* ── NAVIGATION ── */
+.nav-toolbar { border-bottom: 2px solid var(--border); }
+.nav-btn { font-size: 12px; font-weight: 600; }
+.nav-btn.on { background: var(--brown); color: var(--cream); border-color: var(--brown); }
+
+/* ── PAGE SUGGESTIONS ── */
+.sugg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.sugg-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--brown);
+}
+.btn-new-sugg {
+  padding: 7px 16px;
+  background: var(--terra);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+.sugg-cat-group { margin-bottom: 16px; }
+.sugg-cat-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.sugg-card {
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+}
+.sugg-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.sugg-card-author { font-size: 11px; font-weight: 500; color: var(--brown); }
+.sugg-card-date { font-size: 10px; color: var(--text-soft); }
+.sugg-card-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+.sugg-card-actions { display: flex; gap: 6px; margin-top: 8px; }
+.btn-sugg-convert {
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--sage-pale);
+  color: var(--sage);
+  border: 1px solid var(--sage-soft);
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+.btn-sugg-edit, .btn-sugg-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  opacity: 0.4;
+  padding: 2px 4px;
+}
+.btn-sugg-edit:hover, .btn-sugg-del:hover { opacity: 0.8; }
+
+/* ── MODAL SUGGESTION ── */
+.sugg-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(51,40,32,0.55);
+  backdrop-filter: blur(3px);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.sugg-overlay.show { display: flex; }
+.sugg-modal {
+  background: var(--warm);
+  border-radius: 20px 20px 0 0;
+  padding: 20px 20px 36px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 -4px 30px rgba(92,61,46,0.15);
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="header">
+    <div class="header-leaves">✦ 🌿 ✦</div>
+    <h1>Bruno <em>&</em> Élodie</h1>
+    <div class="header-sub">Meillon · 27 juin 2026</div>
+    <div class="header-countdown">J — <span id="jcount">?</span> jours</div>
+    <div class="header-user" id="header-user" onclick="changeUser()" style="display:none">
+      <span id="header-user-emoji"></span>
+      <span id="header-user-name"></span>
+      <span style="opacity:0.5;font-size:10px">✏️</span>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-title">Avancement</span>
+      <span class="progress-pct" id="pct-txt">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-bar" style="width:0%"></div>
+      <span class="progress-groom" id="prog-groom" style="left:0%">🤵</span>
+      <span class="progress-bride">👰</span>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill">
+        <span class="stat-pill-num c-done" id="s-done">0</span>
+        <span class="stat-pill-label">✅ Fait</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-num c-red" id="s-urg">0</span>
+        <span class="stat-pill-label">🔴 Urgents</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-num c-tot" id="s-tot">0</span>
+        <span class="stat-pill-label">Total</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-num c-tot" id="s-budget">0 €</span>
+        <span class="stat-pill-label">💶 Budget</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sync-strip" id="sync">⟳ Chargement…</div>
+
+  <!-- NAV PRINCIPALE -->
+  <div class="toolbar nav-toolbar">
+    <button class="f-btn nav-btn on" id="nav-board" onclick="setView('board',this)">🌿 Le Board</button>
+    <button class="f-btn nav-btn" id="nav-sugg" onclick="setView('suggestions',this)">💡 Suggestions</button>
+  </div>
+
+  <!-- FILTRES BOARD -->
+  <div class="toolbar filter-toolbar" id="filter-toolbar">
+    <button class="f-btn on" onclick="setFilter('all',this)">Tout</button>
+    <button class="f-btn" onclick="setFilter('red',this)">🔴 Urgents</button>
+    <button class="f-btn" onclick="setFilter('inprogress',this)">⏳ À faire</button>
+    <button class="f-btn" onclick="setFilter('done',this)">✅ Faits</button>
+  </div>
+
+  <div class="sections" id="sections"></div>
+  <div id="view-suggestions" style="display:none;padding:14px 12px"></div>
+
+  <div class="footer">
+    Fait avec ❤️ pour Bruno & Élodie<br>
+    <span style="opacity:0.6">v<span id="app-version"></span> · Prismora Solutions 2026</span>
+  </div>
+</div>
+
+<button class="fab" id="fab-btn" onclick="openAddModal()">+</button>
+
+<div class="add-overlay" id="add-overlay" onclick="if(event.target===this)closeAddModal()">
+  <div class="add-modal">
+    <div class="add-modal-handle"></div>
+    <div class="add-modal-title" id="add-modal-title">✦ Ajouter un élément</div>
+    <input type="hidden" id="af-edit-secid" value="">
+    <input type="hidden" id="af-edit-itemid" value="">
+
+    <div class="add-form-row">
+      <span class="add-form-label">Section</span>
+      <select class="add-form-select" id="af-section" onchange="onSectionChange(this)"></select>
+    </div>
+    <div class="add-newsec-row" id="af-newsec-row">
+      <div class="add-newsec-inline">
+        <input class="add-form-input" id="af-newsec-emoji" placeholder="🌿" style="width:52px;flex:none">
+        <input class="add-form-input" id="af-newsec-name" placeholder="Nom de la section" style="flex:1">
+      </div>
+      <input class="add-form-input" id="af-newsec-id" placeholder="ID unique sans espace (ex: livraisons)">
+    </div>
+
+    <div class="add-form-row">
+      <span class="add-form-label">Libellé *</span>
+      <input class="add-form-input" id="af-label" placeholder="Ex: Nombre de chaises">
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Type</span>
+      <select class="add-form-select" id="af-type">
+        <option value="tache">☑️ À faire</option>
+        <option value="chiffre">🔢 Quantité</option>
+        <option value="info">📝 Info</option>
+        <option value="budget">💶 Coût</option>
+        <option value="resource">🔧 Ressource</option>
+      </select>
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Urgence</span>
+      <select class="add-form-select" id="af-urgence">
+        <option value="red">🔴 Urgent</option>
+        <option value="orange">🟠 Important</option>
+        <option value="yellow" selected>🟡 Normal</option>
+        <option value="none">⚪ Pas urgent</option>
+      </select>
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Valeur / Nombre</span>
+      <input class="add-form-input" id="af-valeur" placeholder="">
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Contact</span>
+      <input class="add-form-input" id="af-responsable" placeholder="Qui ?">
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Coût (€)</span>
+      <input class="add-form-input" id="af-budget" placeholder="" type="number">
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Note</span>
+      <textarea class="add-form-textarea" id="af-note" placeholder=""></textarea>
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Date</span>
+      <input type="date" class="add-form-input" id="af-date">
+    </div>
+
+    <div class="add-form-btns">
+      <button class="btn-add-cancel" onclick="closeAddModal()">Annuler</button>
+      <button class="btn-add-confirm" id="af-confirm-btn" onclick="confirmAddItem()">Ajouter ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SUGGESTION -->
+<div class="sugg-overlay" id="sugg-overlay" onclick="if(event.target===this)closeSuggModal()">
+  <div class="sugg-modal">
+    <div class="add-modal-handle"></div>
+    <div class="add-modal-title" id="sugg-modal-title">💡 Nouvelle suggestion</div>
+    <input type="hidden" id="sugg-edit-id" value="">
+
+    <div class="add-form-row">
+      <span class="add-form-label">Catégorie</span>
+      <select class="add-form-select" id="sugg-categorie"></select>
+    </div>
+    <div class="add-form-row">
+      <span class="add-form-label">Ta suggestion *</span>
+      <textarea class="add-form-textarea" id="sugg-texte" placeholder="Décris ton idée, suggestion, point d'attention…" style="min-height:80px"></textarea>
+    </div>
+    <div class="add-form-btns">
+      <button class="btn-add-cancel" onclick="closeSuggModal()">Annuler</button>
+      <button class="btn-add-confirm" id="sugg-confirm-btn" onclick="confirmSuggestion()">Envoyer ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL QUI ES-TU -->
+<div class="who-overlay" id="who-overlay">
+  <div class="who-modal">
+    <div class="who-title">Last Minute Wedding</div>
+    <div class="who-sub">✦ Bienvenue · Qui es-tu ? ✦</div>
+    <div class="who-list">
+      <button class="who-btn" onclick="selectUser('Milkhit','🤘')">
+        <span class="who-btn-emoji">🤘</span>
+        <span class="who-btn-name">@Milkhit</span>
+      </button>
+      <button class="who-btn" onclick="selectUser('JPVT','✨')">
+        <span class="who-btn-emoji">✨</span>
+        <span class="who-btn-name">@JPVT</span>
+      </button>
+      <button class="who-btn" onclick="selectUser('GuitouLove','💘')">
+        <span class="who-btn-emoji">💘</span>
+        <span class="who-btn-name">@GuitouLove</span>
+      </button>
+      <button class="who-btn" onclick="selectUser('Yawple','🕹️')">
+        <span class="who-btn-emoji">🕹️</span>
+        <span class="who-btn-name">@Yawple</span>
+      </button>
+      <button class="who-btn" onclick="selectUser('ToutSec','🏀')">
+        <span class="who-btn-emoji">🏀</span>
+        <span class="who-btn-name">@ToutSec</span>
+      </button>
+      <button class="who-btn" onclick="showOtherInput()">
+        <span class="who-btn-emoji">👤</span>
+        <span class="who-btn-name">Autre…</span>
+      </button>
+    </div>
+    <div class="who-other-row" id="who-other-row">
+      <input class="who-other-input" id="who-other-input" placeholder="Ton prénom…" onkeydown="if(event.key==='Enter')confirmOtherUser()">
+      <button class="who-other-confirm" onclick="confirmOtherUser()">OK</button>
+    </div>
+    <div style="margin-top:20px;font-size:10px;color:var(--text-soft);text-align:center;letter-spacing:1px;line-height:1.8">
+      v<span id="who-version"></span><br>Prismora Solutions 2026
+    </div>
+  </div>
+</div>
+
+<script>
+const APP_VERSION = "0.9.0";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbxwcrLxKqiwi51ivNG2EZsY3mE9iTVUrPF1T7QFlAePkEWTf-B-jtRONKDAJRhsJNnWWA/exec";
+
+let db = [];
+let suggestions = [];
+let filter = 'all';
+let currentView = 'board'; // board | suggestions
+
+// ── USER ──
+const USERS = {
+  'Milkhit':    { emoji:'🤘' },
+  'JPVT':       { emoji:'🧭' },
+  'GuitouLove': { emoji:'🎸' },
+  'Yawple':     { emoji:'🔐' },
+  'ToutSec':    { emoji:'🔒' },
+};
+let currentUser = localStorage.getItem('mariage_user') || '';
+let currentUserEmoji = localStorage.getItem('mariage_user_emoji') || '👤';
+
+function initUser() {
+  if (!currentUser) {
+    document.getElementById('who-overlay').classList.add('show');
+  } else {
+    showUserBadge();
+  }
+}
+
+function selectUser(name, emoji) {
+  currentUser      = name;
+  currentUserEmoji = emoji;
+  localStorage.setItem('mariage_user', name);
+  localStorage.setItem('mariage_user_emoji', emoji);
+  document.getElementById('who-overlay').classList.remove('show');
+  showUserBadge();
+  render();
+}
+
+function showOtherInput() {
+  document.getElementById('who-other-row').classList.add('show');
+  document.getElementById('who-other-input').focus();
+}
+
+function confirmOtherUser() {
+  const val = document.getElementById('who-other-input').value.trim();
+  if (!val) return;
+  selectUser(val, '👤', val);
+}
+
+function changeUser() {
+  document.getElementById('who-overlay').classList.add('show');
+}
+
+function showUserBadge() {
+  const badge = document.getElementById('header-user');
+  badge.style.display = 'inline-flex';
+  document.getElementById('header-user-emoji').textContent = currentUserEmoji;
+  document.getElementById('header-user-name').textContent  = currentUser;
+  const fab = document.getElementById('fab-btn');
+  if (fab) fab.style.display = isEditor() ? 'flex' : 'none';
+}
+const UGC_PIP = { red:'pip-red', orange:'pip-orange', yellow:'pip-yellow', none:'pip-none' };
+
+function isEditor() {
+  return currentUser === 'Milkhit' || currentUser === 'JPVT';
+}
+
+// ── STORAGE ──
+function save() { localStorage.setItem('mariage_be_v3', JSON.stringify(db)); }
+function load() {
+  const s = localStorage.getItem('mariage_be_v3');
+  if (s) { try { db = JSON.parse(s); } catch(e){} }
+}
+function setSyncMsg(msg, cls='') {
+  const el = document.getElementById('sync');
+  el.textContent = msg;
+  el.className = 'sync-strip ' + cls;
+}
+
+async function pushToSheets(payload) {
+  if (!SHEETS_URL) return;
+  setSyncMsg('⟳ Synchronisation…', 'syncing');
+  try {
+    const body = payload || { sections: db };
+    await fetch(SHEETS_URL, {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'text/plain' }
+    });
+    setSyncMsg('✓ Synchronisé', 'ok');
+  } catch(e) { setSyncMsg('💾 Local uniquement'); }
+}
+
+async function pullFromSheets() {
+  if (!SHEETS_URL) { setSyncMsg('💾 Sauvegarde locale'); return; }
+  try {
+    setSyncMsg('⟳ Chargement…', 'syncing');
+    const r = await fetch(SHEETS_URL + '?t=' + Date.now());
+    const d = await r.json();
+    if (d && d.sections && d.sections.length) {
+      db = d.sections;
+      suggestions = d.suggestions || [];
+      save();
+      setSyncMsg('✓ À jour', 'ok');
+    } else if (d && d.length) {
+      // ancien format
+      db = d;
+      setSyncMsg('✓ À jour', 'ok');
+    } else {
+      setSyncMsg('Aucune donnée');
+    }
+  } catch(e) { setSyncMsg('💾 Local uniquement'); }
+}
+
+// ── RENDER ──
+function render() {
+  updateStats();
+  const wrap = document.getElementById('sections');
+  wrap.innerHTML = '';
+  db.forEach(sec => {
+    const visible = filteredItems(sec.items);
+    if (filter !== 'all' && visible.length === 0) return;
+    const div = document.createElement('div');
+    div.className = 'sec open';
+    div.id = 'sec-' + sec.id;
+    const done = sec.items.filter(i => i.statut==='done').length;
+    div.innerHTML = `
+      <div class="sec-head" onclick="toggleSec('${sec.id}')">
+        <span class="sec-emoji">${sec.emoji}</span>
+        <span class="sec-name">${sec.name}</span>
+        <span class="sec-badge">${done}/${sec.items.length}</span>
+        <span class="sec-arrow">▼</span>
+      </div>
+      <div class="sec-body" id="body-${sec.id}">
+        ${visible.map(it => renderItem(it, sec.id)).join('')}
+      </div>
+    `;
+    wrap.appendChild(div);
+  });
+  const diff = Math.ceil((new Date('2026-06-27') - new Date()) / 86400000);
+  document.getElementById('jcount').textContent = diff;
+  setTimeout(() => {
+    document.querySelectorAll('.note-input').forEach(el => {
+      el.style.height = 'auto';
+      el.style.height = el.scrollHeight + 'px';
+    });
+  }, 50);
+  const vEl = document.getElementById('app-version');
+  if (vEl) vEl.textContent = APP_VERSION;
+  const wEl = document.getElementById('who-version');
+  if (wEl) wEl.textContent = APP_VERSION;
+}
+
+function typeIcon(type) {
+  return { tache:'☑️', chiffre:'🔢', info:'📝', budget:'💶', resource:'🔧' }[type] || '📝';
+}
+function typeLabel(type) {
+  return { tache:'À faire', chiffre:'Quantité', info:'Info', budget:'Coût', resource:'Ressource' }[type] || 'Info';
+}
+
+function fieldRowHtml(icon, label, empty, inputHtml) {
+  const emptyClass = empty ? 'field-row-empty field-row-hidden' : '';
+  if (!isEditor()) {
+    // Non-éditeur : affichage texte uniquement, pas d'input
+    if (empty) return ''; // champ vide → invisible
+    const val = inputHtml.match(/value="([^"]*)"/)?.[1] || inputHtml.match(/>(.*?)<\/textarea>/s)?.[1] || '';
+    return `<div class="field-row ${emptyClass}">
+      <span class="field-icon">${icon}</span>
+      <span class="field-label-txt">${label}</span>
+      <span style="font-size:12px;color:var(--text);padding:5px 0;flex:1">${val}</span>
+    </div>`;
+  }
+  return `<div class="field-row ${emptyClass}">
+    <span class="field-icon">${icon}</span>
+    <span class="field-label-txt">${label}</span>
+    ${inputHtml}
+  </div>`;
+}
+
+function renderComments(it, secId) {
+  const comments = it.comments || [];
+  const count = comments.length;
+  const btnLabel = count > 0 ? `💬 Commenter (${count})` : `💬 Commenter`;
+  const btnClass = count > 0 ? 'btn-comment has-comments' : 'btn-comment';
+
+  const commentsHtml = comments.map((c, idx) => `
+      <div class="comment-bubble" id="cbubble-${it.id}-${idx}">
+        <div class="comment-author">
+          ${c.user} <span class="comment-date">${c.date||''}</span>
+          ${(c.user === currentUser || isEditor()) ? `
+            <span style="float:right;display:flex;gap:6px">
+              <button onclick="editComment('${secId}','${it.id}',${idx})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-soft);opacity:0.6">✏️</button>
+              <button onclick="deleteComment('${secId}','${it.id}',${idx})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--red);opacity:0.6">🗑️</button>
+            </span>` : ''}
+        </div>
+        <div id="ctext-${it.id}-${idx}">${c.text}</div>
+        <div class="comment-edit-row hidden" id="cedit-${it.id}-${idx}">
+          <input class="comment-input" id="cedit-input-${it.id}-${idx}" value="${c.text}" style="margin-top:6px">
+          <button class="btn-comment-send" onclick="saveEditComment('${secId}','${it.id}',${idx})" style="margin-top:4px">OK</button>
+        </div>
+      </div>`).join('');
+
+  return `
+    ${count > 0 ? `
+    <div class="comments-section" id="comments-${it.id}">
+      <span class="comments-toggle" onclick="toggleComments('${it.id}')">▾ ${count} commentaire${count>1?'s':''}</span>
+      <div class="comments-list" id="comments-list-${it.id}">${commentsHtml}</div>
+    </div>` : ''}
+    <div class="item-action-bar">
+      ${isEditor() ? `<button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>` : ''}
+      <button class="${btnClass}" id="btn-comment-${it.id}" onclick="toggleCommentInput('${it.id}')">${btnLabel}</button>
+    </div>
+    <div class="comment-input-row" id="comment-input-${it.id}">
+      <input class="comment-input" id="comment-text-${it.id}" placeholder="Votre commentaire…" onkeydown="if(event.key==='Enter')submitComment('${secId}','${it.id}')">
+      <button class="btn-comment-send" onclick="submitComment('${secId}','${it.id}')">Envoyer</button>
+    </div>`;
+}
+
+function renderItem(it, secId) {
+  const done = it.statut === 'done';
+
+  const fValeur  = fieldRowHtml(typeIcon(it.type), typeLabel(it.type), !it.valeur,
+    `<input class="field-input" id="val-${it.id}" value="${it.valeur||''}" placeholder="Saisir…"
+      onchange="quickSave('${secId}','${it.id}','valeur',this.value)" onclick="event.stopPropagation()">`);
+
+  const fContact = fieldRowHtml('👤', 'Contact', !it.responsable,
+    `<input class="field-input" id="res-${it.id}" value="${it.responsable||''}" placeholder="Qui ?"
+      onchange="quickSave('${secId}','${it.id}','responsable',this.value)" onclick="event.stopPropagation()">`);
+
+  const fBudget  = fieldRowHtml('💶', 'Coût', !it.budget,
+    `<input class="field-input" id="bde-${it.id}" value="${it.budget||''}" placeholder="€" type="number"
+      onchange="quickSave('${secId}','${it.id}','budget',this.value)" onclick="event.stopPropagation()">`);
+
+  const fDate = fieldRowHtml('📅', 'Date', !it.date,
+    `<div style="display:flex;align-items:center;gap:6px;flex:1;max-width:340px">
+      <input type="date" class="field-input ${it.date?'has-val':''}" id="dat-${it.id}" value="${it.date||''}" style="flex:1;max-width:none"
+        onchange="this.classList.add('has-val'); quickSave('${secId}','${it.id}','date',this.value)" onclick="event.stopPropagation()">
+      ${it.date ? `<button onclick="event.stopPropagation();clearDate('${secId}','${it.id}')" style="background:none;border:none;cursor:pointer;font-size:14px;opacity:0.4;flex-shrink:0;padding:2px">✕</button>` : ''}
+    </div>`);
+
+  const fNote    = fieldRowHtml('💬', 'Note', !it.commentaire,
+    `<textarea class="field-input note-input" id="com-${it.id}" placeholder="Note libre…"
+      onchange="quickSave('${secId}','${it.id}','commentaire',this.value)"
+      onclick="event.stopPropagation()">${it.commentaire||''}</textarea>`);
+
+  return `
+  <div class="item" id="item-${it.id}">
+    <div class="item-top">
+      <div class="urgency-pip ${UGC_PIP[it.urgence]||'pip-none'}"></div>
+      <span class="item-label ${done?'done-label':''}">${it.label}</span>
+      <select class="status-sel" ${isEditor()?`onchange="changeStatut('${secId}','${it.id}',this.value)"`:'disabled style="opacity:0.6;cursor:default"'}>
+        <option value="todo"       ${it.statut==='todo'?'selected':''}>⬜</option>
+        <option value="inprogress" ${it.statut==='inprogress'?'selected':''}>⏳</option>
+        <option value="done"       ${it.statut==='done'?'selected':''}>✅</option>
+      </select>
+      <div class="item-actions">
+        ${isEditor() ? `
+        <button class="btn-action" onclick="deleteItem('${secId}','${it.id}')" title="Supprimer">🗑️</button>
+        <button class="btn-action" onclick="editItem('${secId}','${it.id}')" title="Modifier">✏️</button>
+        ` : ''}
+      </div>
+    </div>
+    <div class="item-body">
+      <div class="item-fields">
+        ${fValeur}${fContact}${fBudget}${fDate}${fNote}
+      </div>
+      ${renderComments(it, secId)}
+    </div>
+  </div>`;
+}
+
+function toggleEmptyFields(itemId, btn) {
+  const el = document.getElementById('item-' + itemId);
+  const hidden = el.querySelectorAll('.field-row-hidden');
+  const isOpen = btn.dataset.open === '1';
+  hidden.forEach(row => { row.style.display = isOpen ? 'none' : 'flex'; });
+  btn.dataset.open = isOpen ? '0' : '1';
+  btn.textContent  = isOpen ? '+ Ajouter des champs' : '− Réduire';
+  el.querySelectorAll('.note-input').forEach(ta => {
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 'px';
+  });
+}
+
+function toggleComments(itemId) {
+  const list = document.getElementById('comments-list-' + itemId);
+  if (list) list.style.display = list.style.display === 'none' ? 'flex' : 'none';
+}
+
+function clearDate(secId, itemId) {
+  const it = findItem(secId, itemId);
+  it.date = '';
+  const inp = document.getElementById('dat-' + itemId);
+  if (inp) { inp.value = ''; inp.classList.remove('has-val'); }
+  save(); pushToSheets(); render();
+}
+  
+function toggleCommentInput(itemId) {
+  const row = document.getElementById('comment-input-' + itemId);
+  row.classList.toggle('show');
+  if (row.classList.contains('show')) {
+    document.getElementById('comment-text-' + itemId).focus();
+  }
+}
+
+function submitComment(secId, itemId) {
+  const input = document.getElementById('comment-text-' + itemId);
+  const text  = input.value.trim();
+  if (!text) return;
+  const it = findItem(secId, itemId);
+  if (!it.comments) it.comments = [];
+  const now = new Date();
+  const date = now.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+  it.comments.push({ user: currentUser || 'Anonyme', text, date });
+  input.value = '';
+  save(); pushToSheets(); render();
+}
+
+function filteredItems(items) {
+  if (filter === 'all')        return items;
+  if (filter === 'red')        return items.filter(i => i.urgence==='red' && i.statut!=='done');
+  if (filter === 'inprogress') return items.filter(i => i.statut==='inprogress');
+  if (filter === 'done')       return items.filter(i => i.statut==='done');
+  return items;
+}
+
+function updateStats() {
+  const all  = db.flatMap(s => s.items);
+  const done = all.filter(i => i.statut==='done').length;
+  const urg  = all.filter(i => i.urgence==='red' && i.statut!=='done').length;
+  const tot  = all.length;
+  const pct  = tot ? Math.round(done/tot*100) : 0;
+  const budget = all.reduce((sum, i) => sum + (parseFloat(i.budget)||0), 0);
+  document.getElementById('s-done').textContent   = done;
+  document.getElementById('s-urg').textContent    = urg;
+  document.getElementById('s-tot').textContent    = tot;
+  document.getElementById('s-budget').textContent = budget.toLocaleString('fr-FR') + ' €';
+  document.getElementById('pct-txt').textContent  = pct + '%';
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-groom').style.left = Math.max(0, pct - 3) + '%';
+}
+
+function toggleSec(id) { document.getElementById('sec-'+id).classList.toggle('open'); }
+
+function changeStatut(secId, itemId, val) {
+  findItem(secId, itemId).statut = val;
+  save(); pushToSheets(); render();
+}
+
+function quickSave(secId, itemId, field, value) {
+  findItem(secId, itemId)[field] = value;
+  save(); pushToSheets(); render();
+}
+
+function deleteItem(secId, itemId) {
+  if (!confirm('Supprimer cette ligne ?')) return;
+  db.find(s => s.id===secId).items = db.find(s => s.id===secId).items.filter(i => i.id!==itemId);
+  save(); pushToSheets(); render();
+}
+
+function findItem(secId, itemId) {
+  return db.find(s=>s.id===secId).items.find(i=>i.id===itemId);
+}
+
+function setFilter(f, btn) {
+  filter = f;
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+// ── MODAL AJOUT / EDIT ──
+function openAddModal() {
+  const sel = document.getElementById('af-section');
+  sel.innerHTML = db.map(s => `<option value="${s.id}">${s.emoji} ${s.name}</option>`).join('');
+  sel.innerHTML += '<option value="__new__">➕ Nouvelle section…</option>';
+  document.getElementById('af-newsec-row').classList.remove('show');
+  ['af-label','af-valeur','af-responsable','af-budget','af-note','af-newsec-id','af-newsec-name','af-newsec-emoji'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('af-type').value          = 'tache';
+  document.getElementById('af-urgence').value       = 'yellow';
+  document.getElementById('af-date').value          = '';
+  document.getElementById('af-edit-secid').value    = '';
+  document.getElementById('af-edit-itemid').value   = '';
+  document.getElementById('add-modal-title').textContent = '✦ Ajouter un élément';
+  document.getElementById('af-confirm-btn').textContent  = 'Ajouter ✦';
+  document.getElementById('add-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('af-label').focus(), 100);
+}
+
+function closeAddModal() {
+  document.getElementById('add-overlay').classList.remove('show');
+}
+
+function onSectionChange(sel) {
+  const row = document.getElementById('af-newsec-row');
+  sel.value === '__new__' ? row.classList.add('show') : row.classList.remove('show');
+}
+
+function editItem(secId, itemId) {
+  const it = findItem(secId, itemId);
+  openAddModal();
+  document.getElementById('af-section').value       = secId;
+  document.getElementById('af-label').value         = it.label       || '';
+  document.getElementById('af-valeur').value        = it.valeur      || '';
+  document.getElementById('af-responsable').value   = it.responsable || '';
+  document.getElementById('af-budget').value        = it.budget      || '';
+  document.getElementById('af-note').value          = it.commentaire || '';
+  document.getElementById('af-type').value          = it.type        || 'tache';
+  document.getElementById('af-urgence').value       = it.urgence     || 'yellow';
+  document.getElementById('af-date').value          = it.date        || '';
+  document.getElementById('af-edit-secid').value    = secId;
+  document.getElementById('af-edit-itemid').value   = itemId;
+  document.getElementById('add-modal-title').textContent = '✏️ Modifier';
+  document.getElementById('af-confirm-btn').textContent  = 'Enregistrer ✦';
+}
+
+function confirmAddItem() {
+  const label = document.getElementById('af-label').value.trim();
+  if (!label) { document.getElementById('af-label').focus(); return; }
+  const editSecId  = document.getElementById('af-edit-secid').value;
+  const editItemId = document.getElementById('af-edit-itemid').value;
+  const secId      = editSecId || document.getElementById('af-section').value;
+  const valeur      = document.getElementById('af-valeur').value.trim();
+  const responsable = document.getElementById('af-responsable').value.trim();
+  const budget      = document.getElementById('af-budget').value.trim();
+  const note        = document.getElementById('af-note').value.trim();
+  const date        = document.getElementById('af-date').value;
+
+  if (editItemId) {
+    const it        = findItem(editSecId, editItemId);
+    it.label        = label;
+    it.valeur       = valeur;
+    it.responsable  = responsable;
+    it.budget       = budget;
+    it.commentaire  = note;
+    it.type         = document.getElementById('af-type').value;
+    it.urgence      = document.getElementById('af-urgence').value;
+    it.date         = date;
+  } else {
+    const newItem = {
+      id:          secId + '_' + Date.now(),
+      type:        document.getElementById('af-type').value,
+      label, valeur, responsable, budget,
+      commentaire: note,
+      urgence:     document.getElementById('af-urgence').value,
+      statut:      'todo',
+      date,
+      comments:    []
+    };
+    if (secId === '__new__') {
+      const newId    = document.getElementById('af-newsec-id').value.trim();
+      const newName  = document.getElementById('af-newsec-name').value.trim();
+      const newEmoji = document.getElementById('af-newsec-emoji').value.trim() || '📋';
+      if (!newId || !newName) { document.getElementById('af-newsec-name').focus(); return; }
+      newItem.id = newId + '_' + Date.now();
+      db.push({ id: newId, name: newName, emoji: newEmoji, items: [newItem] });
+    } else {
+      db.find(s => s.id===secId).items.push(newItem);
+    }
+  }
+  save(); pushToSheets(); render();
+  closeAddModal();
+}
+
+function deleteComment(secId, itemId, idx) {
+  if (!confirm('Supprimer ce commentaire ?')) return;
+  const it = findItem(secId, itemId);
+  it.comments.splice(idx, 1);
+  save(); pushToSheets(); render();
+}
+
+function editComment(secId, itemId, idx) {
+  const editRow = document.getElementById(`cedit-${itemId}-${idx}`);
+  const textDiv = document.getElementById(`ctext-${itemId}-${idx}`);
+  editRow.classList.remove('hidden');
+  textDiv.style.display = 'none';
+  document.getElementById(`cedit-input-${itemId}-${idx}`).focus();
+}
+
+function saveEditComment(secId, itemId, idx) {
+  const input = document.getElementById(`cedit-input-${itemId}-${idx}`);
+  const val = input.value.trim();
+  if (!val) return;
+  const it = findItem(secId, itemId);
+  it.comments[idx].text = val;
+  it.comments[idx].date += ' (modifié)';
+  save(); pushToSheets(); render();
+}
+
+// ── VUES ──
+function setView(view, btn) {
+  currentView = view;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const filterBar = document.getElementById('filter-toolbar');
+  const boardView = document.getElementById('sections');
+  const suggView  = document.getElementById('view-suggestions');
+  const fab       = document.getElementById('fab-btn');
+  if (view === 'board') {
+    filterBar.style.display = '';
+    boardView.style.display = '';
+    suggView.style.display  = 'none';
+    if (fab) fab.style.display = isEditor() ? 'flex' : 'none';
+  } else {
+    filterBar.style.display = 'none';
+    boardView.style.display = 'none';
+    suggView.style.display  = '';
+    if (fab) fab.style.display = 'none';
+    renderSuggestions();
+  }
+}
+
+// ── SUGGESTIONS ──
+function renderSuggestions() {
+  const wrap = document.getElementById('view-suggestions');
+  if (!wrap) return;
+
+  // Grouper par catégorie
+  const grouped = {};
+  suggestions.forEach(s => {
+    if (!grouped[s.categorie]) grouped[s.categorie] = [];
+    grouped[s.categorie].push(s);
+  });
+
+  const canEdit = (s) => s.user === currentUser || isEditor();
+
+  const groupsHtml = Object.entries(grouped).map(([cat, items]) => `
+    <div class="sugg-cat-group">
+      <div class="sugg-cat-title">${cat}</div>
+      ${items.map(s => `
+        <div class="sugg-card" id="suggcard-${s.id}">
+          <div class="sugg-card-header">
+            <span class="sugg-card-author">${s.user}</span>
+            <span class="sugg-card-date">${s.date}</span>
+          </div>
+          <div class="sugg-card-text">${s.texte}</div>
+          <div class="sugg-card-actions">
+            ${isEditor() ? `<button class="btn-sugg-convert" onclick="convertSuggestion('${s.id}','${cat}','${s.texte.replace(/'/g,"\'")}')">→ Créer une tâche</button>` : ''}
+            ${canEdit(s) ? `
+              <button class="btn-sugg-edit" onclick="editSuggestion('${s.id}','${cat}','${s.texte.replace(/'/g,"\'")}')">✏️</button>
+              <button class="btn-sugg-del" onclick="deleteSuggestion('${s.id}')">🗑️</button>
+            ` : ''}
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+
+  wrap.innerHTML = `
+    <div class="sugg-header">
+      <span class="sugg-title">💡 Suggestions</span>
+      <button class="btn-new-sugg" onclick="openSuggModal()">+ Nouvelle</button>
+    </div>
+    ${suggestions.length === 0 ? '<p style="text-align:center;color:var(--text-soft);font-size:13px;margin-top:40px">Aucune suggestion pour l&apos;instant.<br>Sois le premier ! 👇</p>' : groupsHtml}
+  `;
+}
+
+function openSuggModal(editId, editCat, editTexte) {
+  // Peupler catégories depuis les sections
+  const sel = document.getElementById('sugg-categorie');
+  sel.innerHTML = db.map(s => `<option value="${s.name}">${s.emoji} ${s.name}</option>`).join('');
+  document.getElementById('sugg-texte').value = editTexte || '';
+  document.getElementById('sugg-edit-id').value = editId || '';
+  if (editCat) sel.value = editCat;
+  document.getElementById('sugg-modal-title').textContent = editId ? '✏️ Modifier la suggestion' : '💡 Nouvelle suggestion';
+  document.getElementById('sugg-confirm-btn').textContent = editId ? 'Enregistrer ✦' : 'Envoyer ✦';
+  document.getElementById('sugg-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('sugg-texte').focus(), 100);
+}
+
+function closeSuggModal() {
+  document.getElementById('sugg-overlay').classList.remove('show');
+}
+
+async function confirmSuggestion() {
+  const texte = document.getElementById('sugg-texte').value.trim();
+  if (!texte) { document.getElementById('sugg-texte').focus(); return; }
+  const categorie = document.getElementById('sugg-categorie').value;
+  const editId    = document.getElementById('sugg-edit-id').value;
+  const now = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+
+  if (editId) {
+    // Modifier
+    const s = suggestions.find(s => s.id === editId);
+    if (s) s.texte = texte;
+    await pushToSheets({ editSuggestion: { id: editId, texte } });
+  } else {
+    // Nouvelle
+    const newS = { id: 'sugg_' + Date.now(), categorie, user: currentUser || 'Anonyme', date: now, texte };
+    suggestions.push(newS);
+    await pushToSheets({ suggestion: newS });
+  }
+  closeSuggModal();
+  renderSuggestions();
+}
+
+async function deleteSuggestion(id) {
+  if (!confirm('Supprimer cette suggestion ?')) return;
+  suggestions = suggestions.filter(s => s.id !== id);
+  await pushToSheets({ deleteSuggestion: id });
+  renderSuggestions();
+}
+
+function editSuggestion(id, cat, texte) {
+  openSuggModal(id, cat, texte);
+}
+
+function convertSuggestion(id, cat, texte) {
+  // Ouvre le modal d'ajout pré-rempli avec le texte de la suggestion
+  setView('board', document.getElementById('nav-board'));
+  openAddModal();
+  // Trouver la section correspondante
+  const sec = db.find(s => s.name === cat);
+  if (sec) document.getElementById('af-section').value = sec.id;
+  document.getElementById('af-label').value = texte.substring(0, 80);
+  document.getElementById('af-note').value  = 'Issu d'une suggestion de ' + (suggestions.find(s=>s.id===id)?.user||'');
+}
+
+// ── INIT ──
+load();
+render();
+pullFromSheets().then(() => render());
+initUser();
+document.addEventListener('input', e => {
+  if (e.target.classList.contains('note-input')) {
+    e.target.style.height = 'auto';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  }
+});
+</script>
+</body>
+</html>
