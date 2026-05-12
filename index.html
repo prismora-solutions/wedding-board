@@ -861,7 +861,7 @@ function renderComments(it, secId) {
       <div class="comment-bubble" id="cbubble-${it.id}-${idx}">
         <div class="comment-author">
           ${c.user} <span class="comment-date">${c.date||''}</span>
-          ${(c.user === currentUser || isEditor()) ? ``
+          ${(c.user === currentUser || isEditor()) ? `
             <span style="float:right;display:flex;gap:6px">
               <button onclick="editComment('${secId}','${it.id}',${idx})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-soft);opacity:0.6">✏️</button>
               <button onclick="deleteComment('${secId}','${it.id}',${idx})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--red);opacity:0.6">🗑️</button>
