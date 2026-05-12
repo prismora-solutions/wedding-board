@@ -186,10 +186,8 @@ body {
 }
 
 @media (min-width: 768px) {
-  .item-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 0; align-items: start; }
-  .field-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); grid-column: span 3; }
-  .field-row-3 .field-col { padding: 6px 12px; border-right: 1px solid var(--border-soft); }
-  .field-row-3 .field-col:last-child { border-right: none; }
+  .item-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; }
+  .field-group-3 { display: contents; }
   .field-group-2 { grid-column: span 2; }
   .field-full { grid-column: span 3; }
 }
@@ -1144,16 +1142,8 @@ function renderItem(it, secId) {
     </div>
     <div class="item-body">
       <div class="item-fields">
-        <div class="field-row-3">
-          <div class="field-col">${fValeur}</div>
-          <div class="field-col">${fBudget}</div>
-          <div class="field-col">${fContact}</div>
-        </div>
-        <div class="field-row-3">
-          <div class="field-col">${fDate}</div>
-          <div class="field-col">${fHeure}</div>
-          <div class="field-col">${fDuree}</div>
-        </div>
+        <div class="field-group-3">${fValeur}${fBudget}${fContact}</div>
+        <div class="field-group-3">${fDate}${fHeure}${fDuree}</div>
         <div class="field-group-2">${fAdresse}</div>
         <div class="field-group-2">${fLien}</div>
         <div class="field-group-2">${fNote}</div>
