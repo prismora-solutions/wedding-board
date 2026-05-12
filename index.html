@@ -1749,7 +1749,7 @@ function renderSectionsNav(activeId) {
   if (!inner) return;
   const toutClass = (!activeId) ? 'sec-chip active' : 'sec-chip';
   inner.innerHTML = `<button class="${toutClass}" onclick="focusSection(null)">✦ Tout</button>` +
-    db.map(sec => {
+    db.filter(sec => sec.id !== RETRO_SEC_ID).map(sec => {
       const cls = activeId === sec.id ? 'sec-chip active' : 'sec-chip';
       return `<button class="${cls}" onclick="focusSection('${sec.id}')">
         <span>${sec.emoji}</span><span>${sec.name}</span>
