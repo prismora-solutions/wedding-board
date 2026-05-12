@@ -509,9 +509,27 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .btn-add-cancel { padding: 13px 20px; background: var(--parchment); color: var(--text-mid); border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; }
 
 /* ── NAVIGATION ── */
-.nav-toolbar { border-bottom: 2px solid var(--border); }
-.nav-btn { font-size: 12px; font-weight: 600; }
+.nav-toolbar {
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  flex-wrap: wrap;
+}
+.nav-btn {
+  font-size: 12px;
+  font-weight: 600;
+  width: 160px;
+  text-align: center;
+  flex-shrink: 0;
+}
 .nav-btn.on { background: var(--brown); color: var(--cream); border-color: var(--brown); }
+
+@media (max-width: 600px) {
+  .nav-toolbar { gap: 6px; padding: 8px 10px; }
+  .nav-btn { width: calc(50% - 6px); flex-shrink: 0; }
+}
 
 /* ── PAGE SUGGESTIONS ── */
 .sugg-header {
@@ -804,7 +822,7 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 
   <!-- NAV PRINCIPALE MENU-->
   <div class="toolbar nav-toolbar">
-    <button class="f-btn nav-btn on" id="nav-board" onclick="setView('board',this)">🌿 Le Board</button>
+    <button class="f-btn nav-btn on" id="nav-board" onclick="setView('board',this)">🌿 Wedding Board</button>
     <button class="f-btn nav-btn" id="nav-retro" onclick="setView('retro',this)">🗓️ Rétro-Planning</button>
     <button class="f-btn nav-btn" id="nav-budget" onclick="setView('budget',this)">💶 Budget</button>
     <button class="f-btn nav-btn" id="nav-sugg" onclick="setView('suggestions',this)">💡 Suggestions</button>
