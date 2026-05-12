@@ -1399,12 +1399,12 @@ async function confirmSuggestion() {
     // Modifier
     const s = suggestions.find(s => s.id === editId);
     if (s) s.texte = texte;
-    await pushToSheets({ editSuggestion: { id: editId, texte } });
+    pushToSheets({ editSuggestion: { id: editId, texte } });
   } else {
     // Nouvelle
     const newS = { id: 'sugg_' + Date.now(), categorie, user: currentUser || 'Anonyme', date: now, texte };
     suggestions.push(newS);
-    await pushToSheets({ suggestion: newS });
+    pushToSheets({ suggestion: newS });
   }
   closeSuggModal();
   renderSuggestions();
@@ -1413,7 +1413,7 @@ async function confirmSuggestion() {
 async function deleteSuggestion(id) {
   if (!confirm('Supprimer cette suggestion ?')) return;
   suggestions = suggestions.filter(s => s.id !== id);
-  await pushToSheets({ deleteSuggestion: id });
+  pushToSheets({ deleteSuggestion: id });
   renderSuggestions();
 }
 
