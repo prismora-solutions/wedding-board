@@ -509,18 +509,46 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .btn-add-cancel { padding: 13px 20px; background: var(--parchment); color: var(--text-mid); border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; }
 
 /* ── SECTIONS QUICKNAV ── */
-.sections-nav {
+.sections-nav-wrap {
   display: flex;
-  gap: 6px;
-  padding: 8px 12px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
+  align-items: center;
   background: var(--cream);
   border-bottom: 1px solid var(--border-soft);
+  position: relative;
+}
+.sections-nav-inner {
+  display: flex;
+  gap: 6px;
+  padding: 8px 6px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  flex: 1;
 }
-.sections-nav::-webkit-scrollbar { display: none; }
+.sections-nav-inner::-webkit-scrollbar { display: none; }
+.sec-nav-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 100%;
+  min-height: 36px;
+  background: var(--cream);
+  border: none;
+  color: var(--text-soft);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.15s;
+  line-height: 1;
+}
+.sec-nav-arrow:hover { color: var(--terra); }
+.sec-nav-arrow.left  { border-right: 1px solid var(--border-soft); }
+.sec-nav-arrow.right { border-left:  1px solid var(--border-soft); }
+/* Masquer les flèches sur mobile (swipe suffit) */
+@media (max-width: 600px) {
+  .sec-nav-arrow { display: none; }
+  .sections-nav-inner { padding: 8px 12px; }
+}
 .sec-chip {
   display: inline-flex;
   align-items: center;
@@ -860,7 +888,11 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   </div>
 
   <!-- SECTIONS QUICKNAV -->
-  <div class="sections-nav" id="sections-nav" style="display:none"></div>
+  <div class="sections-nav-wrap" id="sections-nav" style="display:none">
+    <button class="sec-nav-arrow left" id="sec-arr-left" onclick="scrollSecNav(-1)">‹</button>
+    <div class="sections-nav-inner" id="sections-nav-inner"></div>
+    <button class="sec-nav-arrow right" id="sec-arr-right" onclick="scrollSecNav(1)">›</button>
+  </div>
 
   <!-- FILTRES BOARD -->
   <div class="toolbar filter-toolbar" id="filter-toolbar">
@@ -1576,7 +1608,7 @@ function setView(view, btn) {
   if (view === 'board') {
     filterBar.style.display = '';
     boardView.style.display = '';
-    if (sectionsNav) { sectionsNav.style.display = ''; renderSectionsNav(); }
+    if (sectionsNav) { sectionsNav.style.display = 'flex'; renderSectionsNav(); }
     if (fab) fab.style.display = isEditor() ? 'flex' : 'none';
   } else if (view === 'suggestions') {
     suggView.style.display = '';
@@ -1591,23 +1623,42 @@ function setView(view, btn) {
 }
 
 function renderSectionsNav() {
-  const nav = document.getElementById('sections-nav');
-  if (!nav) return;
-  nav.innerHTML = db.map(sec => `
+  const inner = document.getElementById('sections-nav-inner');
+  if (!inner) return;
+  inner.innerHTML = db.map(sec => `
     <button class="sec-chip" onclick="scrollToSection('${sec.id}')">
       <span>${sec.emoji}</span><span>${sec.name}</span>
     </button>`).join('');
+  updateSecNavArrows();
+}
+
+function scrollSecNav(dir) {
+  const inner = document.getElementById('sections-nav-inner');
+  if (!inner) return;
+  inner.scrollBy({ left: dir * 160, behavior: 'smooth' });
+}
+
+function updateSecNavArrows() {
+  const inner = document.getElementById('sections-nav-inner');
+  if (!inner) return;
+  inner.addEventListener('scroll', () => {
+    const l = document.getElementById('sec-arr-left');
+    const r = document.getElementById('sec-arr-right');
+    if (l) l.style.opacity = inner.scrollLeft > 4 ? '1' : '0.25';
+    if (r) r.style.opacity = inner.scrollLeft < inner.scrollWidth - inner.clientWidth - 4 ? '1' : '0.25';
+  }, { passive: true });
+  // état initial
+  const l = document.getElementById('sec-arr-left');
+  if (l) l.style.opacity = '0.25';
 }
 
 function scrollToSection(id) {
-  // Ouvrir la section si repliée
   const secEl = document.getElementById('sec-' + id);
   if (secEl && !secEl.classList.contains('open')) secEl.classList.add('open');
   secEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // Highlight temporaire de la chip
   document.querySelectorAll('.sec-chip').forEach(c => c.classList.remove('active'));
-  const chips = document.querySelectorAll('.sec-chip');
   const idx = db.findIndex(s => s.id === id);
+  const chips = document.querySelectorAll('.sec-chip');
   if (chips[idx]) {
     chips[idx].classList.add('active');
     setTimeout(() => chips[idx].classList.remove('active'), 1500);
