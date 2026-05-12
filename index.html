@@ -683,23 +683,6 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   box-shadow: 0 -4px 30px rgba(92,61,46,0.15);
 }
 
-.fab-nav {
-  position: fixed;
-  bottom: 24px;
-  left: calc(50% - 430px + 20px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 100;
-}
-
-@media (max-width: 900px) {
-  .fab-nav { left: 16px; }
-}
-  
-.fab-sec { width: 48px; height: 48px; border-radius: 50%; background: var(--terra); color: white; border: none; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(92,61,46,0.3); cursor: pointer; }
-.fab-sec:active { background: var(--terra-soft); }
-
 /* ── VUE BUDGET ── */
 .budget-kpis { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .budget-kpi {
@@ -914,10 +897,7 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 </div>
 
 <button class="fab" id="fab-btn" onclick="openAddModal()">+</button>
-<div class="fab-nav">
-  <button class="fab-sec" id="fab-up" onclick="navSection(-1)" title="Section précédente">↑</button>
-  <button class="fab-sec" id="fab-down" onclick="navSection(1)" title="Section suivante">↓</button>
-</div>
+
 
 <div class="add-overlay" id="add-overlay" onclick="if(event.target===this)closeAddModal()">
   <div class="add-modal">
@@ -1203,7 +1183,7 @@ function render() {
   });
   const diff = Math.ceil((new Date('2026-06-27') - new Date()) / 86400000);
   document.getElementById('jcount').textContent = diff;
-  if (currentView === 'board') renderSectionsNav();
+  if (currentView === 'board') renderSectionsNav(null);
   setTimeout(() => {
     document.querySelectorAll('.note-input').forEach(el => {
       el.style.height = 'auto';
@@ -1461,6 +1441,7 @@ function setFilter(f, btn) {
   filter = f;
   document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  document.querySelectorAll('.sec').forEach(el => el.style.display = '');
   render();
 }
 
@@ -1622,46 +1603,36 @@ function setView(view, btn) {
   }
 }
 
-function renderSectionsNav() {
+function renderSectionsNav(activeId) {
   const inner = document.getElementById('sections-nav-inner');
   if (!inner) return;
-  inner.innerHTML = db.map(sec => `
-    <button class="sec-chip" onclick="scrollToSection('${sec.id}')">
-      <span>${sec.emoji}</span><span>${sec.name}</span>
-    </button>`).join('');
+  const toutClass = (!activeId) ? 'sec-chip active' : 'sec-chip';
+  inner.innerHTML = `<button class="${toutClass}" onclick="focusSection(null)">✦ Tout</button>` +
+    db.map(sec => {
+      const cls = activeId === sec.id ? 'sec-chip active' : 'sec-chip';
+      return `<button class="${cls}" onclick="focusSection('${sec.id}')">
+        <span>${sec.emoji}</span><span>${sec.name}</span>
+      </button>`;
+    }).join('');
   updateSecNavArrows();
 }
 
-function scrollSecNav(dir) {
-  const inner = document.getElementById('sections-nav-inner');
-  if (!inner) return;
-  inner.scrollBy({ left: dir * 160, behavior: 'smooth' });
-}
-
-function updateSecNavArrows() {
-  const inner = document.getElementById('sections-nav-inner');
-  if (!inner) return;
-  inner.addEventListener('scroll', () => {
-    const l = document.getElementById('sec-arr-left');
-    const r = document.getElementById('sec-arr-right');
-    if (l) l.style.opacity = inner.scrollLeft > 4 ? '1' : '0.25';
-    if (r) r.style.opacity = inner.scrollLeft < inner.scrollWidth - inner.clientWidth - 4 ? '1' : '0.25';
-  }, { passive: true });
-  // état initial
-  const l = document.getElementById('sec-arr-left');
-  if (l) l.style.opacity = '0.25';
-}
-
-function scrollToSection(id) {
-  const secEl = document.getElementById('sec-' + id);
-  if (secEl && !secEl.classList.contains('open')) secEl.classList.add('open');
-  secEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  document.querySelectorAll('.sec-chip').forEach(c => c.classList.remove('active'));
-  const idx = db.findIndex(s => s.id === id);
-  const chips = document.querySelectorAll('.sec-chip');
-  if (chips[idx]) {
-    chips[idx].classList.add('active');
-    setTimeout(() => chips[idx].classList.remove('active'), 1500);
+function focusSection(id) {
+  const allSecs = document.querySelectorAll('.sec');
+  if (!id) {
+    // Tout afficher
+    allSecs.forEach(el => el.style.display = '');
+    renderSectionsNav(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    // Masquer toutes sauf celle-ci, ouvrir si repliée
+    allSecs.forEach(el => {
+      el.style.display = el.id === 'sec-' + id ? '' : 'none';
+    });
+    const secEl = document.getElementById('sec-' + id);
+    if (secEl && !secEl.classList.contains('open')) secEl.classList.add('open');
+    renderSectionsNav(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
@@ -2005,20 +1976,7 @@ async function pushSuggestion(action, data) {
   } catch(e) { console.log('sugg error', e); }
 }
 
-function navSection(dir) {
-  const ids = db.map(s => 'sec-' + s.id);
-  const tops = ids.map(id => ({ id, top: document.getElementById(id)?.getBoundingClientRect().top }));
-  if (dir === -1) {
-    const above = tops.filter(t => t.top < -10);
-    if (above.length === 0) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-    const target = above[above.length - 1];
-    document.getElementById(target.id)?.scrollIntoView({ behavior: 'smooth' });
-  } else {
-    const below = tops.filter(t => t.top > 10);
-    if (below.length === 0) return;
-    document.getElementById(below[0].id)?.scrollIntoView({ behavior: 'smooth' });
-  }
-}
+
 
 function initUser() {
   if (!currentUser) {
