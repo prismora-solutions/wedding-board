@@ -1527,7 +1527,10 @@ function initUser() {
 load();
 render();
 pullFromSheets().then(() => { render(); renderSuggestions(); });
-setInterval(() => pullFromSheets().then(() => { render(); renderSuggestions(); }), 30000);
+setInterval(() => {
+  if (document.activeElement && document.activeElement.tagName.match(/INPUT|TEXTAREA|SELECT/)) return;
+  pullFromSheets().then(() => { render(); renderSuggestions(); });
+}, 30000);
 setTimeout(initUser, 100);
 document.addEventListener('input', e => {
   if (e.target.classList.contains('note-input')) {
