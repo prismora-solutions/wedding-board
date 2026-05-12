@@ -1153,7 +1153,8 @@ let db = [];
 let suggestions = [];
 let porteurs = [];
 let filter = 'all';
-let currentView = 'board'; // board | suggestions | budget
+let currentView = 'board';
+let _focusedSection = null; // section active dans le Wedding Board
 
 // ── USER ──
 const USERS = {
@@ -1297,7 +1298,14 @@ function render() {
   });
   const diff = Math.ceil((new Date('2026-06-27') - new Date()) / 86400000);
   document.getElementById('jcount').textContent = diff;
-  if (currentView === 'board') renderSectionsNav(null);
+  if (currentView === 'board') {
+    renderSectionsNav(_focusedSection);
+    if (_focusedSection) {
+      document.querySelectorAll('.sec').forEach(el => {
+        el.style.display = el.id === 'sec-' + _focusedSection ? '' : 'none';
+      });
+    }
+  }
   setTimeout(() => {
     document.querySelectorAll('.note-input').forEach(el => {
       el.style.height = 'auto';
@@ -1553,6 +1561,7 @@ function findItem(secId, itemId) {
 
 function setFilter(f, btn) {
   filter = f;
+  _focusedSection = null;
   document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
   document.querySelectorAll('.sec').forEach(el => el.style.display = '');
@@ -1750,14 +1759,13 @@ function renderSectionsNav(activeId) {
 }
 
 function focusSection(id) {
+  _focusedSection = id;
   const allSecs = document.querySelectorAll('.sec');
   if (!id) {
-    // Tout afficher
     allSecs.forEach(el => el.style.display = '');
     renderSectionsNav(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    // Masquer toutes sauf celle-ci, ouvrir si repliée
     allSecs.forEach(el => {
       el.style.display = el.id === 'sec-' + id ? '' : 'none';
     });
@@ -2400,7 +2408,10 @@ load();
 setView('board', document.getElementById('nav-board'));
 pullFromSheets().then(() => { render(); renderSuggestions(); if (currentUser) showUserBadge(); });
 setInterval(() => {
-  if (document.activeElement && document.activeElement.tagName.match(/INPUT|TEXTAREA|SELECT/)) return;
+  const saisieActive = document.activeElement && document.activeElement.tagName.match(/INPUT|TEXTAREA|SELECT/);
+  const filtreBoard  = _focusedSection !== null || filter !== 'all';
+  const filtreRetro  = currentView === 'retro' && _retroWeek !== 'all';
+  if (saisieActive || filtreBoard || filtreRetro) return;
   pullFromSheets().then(() => { render(); renderSuggestions(); if (currentUser) showUserBadge(); });
 }, 30000);
 setTimeout(initUser, 100);
