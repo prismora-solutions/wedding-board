@@ -918,8 +918,9 @@ async function pullFromSheets() {
     setSyncMsg('⟳ Chargement…', 'syncing');
     const r = await fetch(SHEETS_URL + '?t=' + Date.now());
     const d = await r.json();
-    if (d && d.length) {
-      db = d;
+    if (d && d.sections && d.sections.length) {
+      db = d.sections;
+      if (Array.isArray(d.suggestions)) suggestions = d.suggestions;
       save();
       setSyncMsg('✓ À jour', 'ok');
     } else {
@@ -1457,7 +1458,7 @@ async function pushSuggestion(action, data) {
 // ── INIT ──
 load();
 render();
-pullFromSheets().then(() => { render(); pullSuggestions(); });
+pullFromSheets().then(() => { render(); renderSuggestions(); });
 initUser();
 document.addEventListener('input', e => {
   if (e.target.classList.contains('note-input')) {
