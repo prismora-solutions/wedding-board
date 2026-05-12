@@ -1429,7 +1429,7 @@ function convertSuggestion(id, cat, texte) {
   const sec = db.find(s => s.name === cat);
   if (sec) document.getElementById('af-section').value = sec.id;
   document.getElementById('af-label').value = texte.substring(0, 80);
-  document.getElementById('af-note').value  = 'Issu d'une suggestion de ' + (suggestions.find(s=>s.id===id)?.user||'');
+  document.getElementById('af-note').value  = 'Issu d&apos;une suggestion de ' + (suggestions.find(s=>s.id===id)?.user||'');
 }
 
 // ── INIT ──
