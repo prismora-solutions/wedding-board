@@ -1603,6 +1603,24 @@ function setView(view, btn) {
   }
 }
 
+function scrollSecNav(dir) {
+  const inner = document.getElementById('sections-nav-inner');
+  if (!inner) return;
+  inner.scrollBy({ left: dir * 160, behavior: 'smooth' });
+}
+
+function updateSecNavArrows() {
+  const inner = document.getElementById('sections-nav-inner');
+  if (!inner) return;
+  const l = document.getElementById('sec-arr-left');
+  const r = document.getElementById('sec-arr-right');
+  if (l) l.style.opacity = '0.25';
+  inner.addEventListener('scroll', () => {
+    if (l) l.style.opacity = inner.scrollLeft > 4 ? '1' : '0.25';
+    if (r) r.style.opacity = inner.scrollLeft < inner.scrollWidth - inner.clientWidth - 4 ? '1' : '0.25';
+  }, { passive: true });
+}
+
 function renderSectionsNav(activeId) {
   const inner = document.getElementById('sections-nav-inner');
   if (!inner) return;
@@ -1988,10 +2006,10 @@ function initUser() {
 // ── INIT ──
 load();
 render();
-pullFromSheets().then(() => { render(); renderSuggestions(); });
+pullFromSheets().then(() => { render(); renderSuggestions(); if (currentUser) showUserBadge(); });
 setInterval(() => {
   if (document.activeElement && document.activeElement.tagName.match(/INPUT|TEXTAREA|SELECT/)) return;
-  pullFromSheets().then(() => { render(); renderSuggestions(); });
+  pullFromSheets().then(() => { render(); renderSuggestions(); if (currentUser) showUserBadge(); });
 }, 30000);
 setTimeout(initUser, 100);
 document.addEventListener('input', e => {
