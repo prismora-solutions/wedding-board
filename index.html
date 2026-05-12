@@ -340,7 +340,7 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .item-action-bar {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 8px 0 4px 0;
   gap: 8px;
 }
@@ -1046,7 +1046,7 @@ function renderComments(it, secId) {
 
   return `
     <div class="item-action-bar">
-      ${isEditor() ? `<button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>` : ''}
+      ${isEditor() ? `<button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>` : '<span></span>'}
       <button class="${btnClass}" id="btn-comment-${it.id}" onclick="toggleCommentInput('${it.id}')">${btnLabel}</button>
     </div>
     ${count > 0 ? `
