@@ -207,53 +207,35 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .field-row-empty .field-input { background: white; color: var(--text-soft); }
 .field-row-empty .field-input::placeholder { color: var(--border); }
 
-/* ── DESKTOP : layout table ── */
+/* ── DESKTOP : layout flexbox ── */
 @media (min-width: 768px) {
   .field-line-3 {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
     margin-bottom: 6px;
   }
   .field-line-3 .field-col {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 4px 10px 4px 0;
-    border-right: 1px solid var(--border-soft);
-    width: 33.33%;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+    padding-right: 12px;
+    box-sizing: border-box;
   }
-  .field-line-3 .field-col:last-child {
-    border-right: none;
-    padding-right: 0;
-  }
-  .field-line-3 .field-col .field-row {
-    width: 100%;
-  }
-  .field-line-3 .field-col .field-input {
-    width: 100%;
-    min-width: 0;
-  }
+  .field-line-3 .field-col:empty { display: none; }
+  .field-line-3 .field-col .field-row { width: 100%; }
+  .field-line-3 .field-col .field-input { width: 100%; min-width: 0; }
 
   .field-line-2 {
-    display: table;
-    width: 66.66%;
-    table-layout: fixed;
-    border-collapse: collapse;
+    display: flex;
     margin-bottom: 4px;
   }
   .field-line-2 .field-col {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 4px 0;
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
+    box-sizing: border-box;
   }
-  .field-line-2 .field-col .field-row {
-    width: 100%;
-  }
-  .field-line-2 .field-col .field-input {
-    width: 100%;
-    min-width: 0;
-  }
+  .field-line-2 .field-col .field-row { width: 100%; }
+  .field-line-2 .field-col .field-input { width: 100%; min-width: 0; }
 }
 
 /* ── INDICATEUR PREVIEW ── */
@@ -927,14 +909,14 @@ function renderItem(it, secId) {
     <div class="item-body">
       <div class="item-fields">
         <div class="field-line field-line-3">
-          <div class="field-col">${fValeur}</div>
-          <div class="field-col">${fBudget}</div>
-          <div class="field-col">${fContact}</div>
+          ${fValeur ? `<div class="field-col">${fValeur}</div>` : ''}
+          ${fBudget ? `<div class="field-col">${fBudget}</div>` : ''}
+          ${fContact ? `<div class="field-col">${fContact}</div>` : ''}
         </div>
         <div class="field-line field-line-3">
-          <div class="field-col">${fDate}</div>
-          <div class="field-col">${fHeure}</div>
-          <div class="field-col">${fDuree}</div>
+          ${fDate ? `<div class="field-col">${fDate}</div>` : ''}
+          ${fHeure ? `<div class="field-col">${fHeure}</div>` : ''}
+          ${fDuree ? `<div class="field-col">${fDuree}</div>` : ''}
         </div>
         <div class="field-line field-line-2">
           <div class="field-col">${fAdresse}</div>
