@@ -1400,12 +1400,12 @@ async function confirmSuggestion() {
     // Modifier
     const s = suggestions.find(s => s.id === editId);
     if (s) s.texte = texte;
-    pushToSheets({ editSuggestion: { id: editId, texte } });
+    pushSuggestion('editSugg', { id: editId, texte });
   } else {
     // Nouvelle
     const newS = { id: 'sugg_' + Date.now(), categorie, user: currentUser || 'Anonyme', date: now, texte };
     suggestions.push(newS);
-    pushToSheets({ suggestion: newS });
+    pushSuggestion('addSugg', newS);
   }
   closeSuggModal();
   renderSuggestions();
@@ -1414,7 +1414,7 @@ async function confirmSuggestion() {
 async function deleteSuggestion(id) {
   if (!confirm('Supprimer cette suggestion ?')) return;
   suggestions = suggestions.filter(s => s.id !== id);
-  pushToSheets({ deleteSuggestion: id });
+  pushSuggestion('deleteSugg', { id });
   renderSuggestions();
 }
 
@@ -1433,10 +1433,25 @@ function convertSuggestion(id, cat, texte) {
   document.getElementById('af-note').value  = 'Issu d\'une suggestion de ' + (suggestions.find(s=>s.id===id)?.user||'');
 }
 
+async function pullSuggestions() {
+  try {
+    const r = await fetch(SHEETS_URL + '?action=getSugg&t=' + Date.now());
+    const d = await r.json();
+    if (Array.isArray(d)) suggestions = d;
+  } catch(e) { console.log('sugg error', e); }
+}
+
+async function pushSuggestion(action, data) {
+  try {
+    const params = '?action=' + action + '&data=' + encodeURIComponent(JSON.stringify(data));
+    await fetch(SHEETS_URL + params);
+  } catch(e) { console.log('sugg push error', e); }
+}
+
 // ── INIT ──
 load();
 render();
-pullFromSheets().then(() => render());
+pullFromSheets().then(() => { render(); pullSuggestions(); });
 initUser();
 document.addEventListener('input', e => {
   if (e.target.classList.contains('note-input')) {
