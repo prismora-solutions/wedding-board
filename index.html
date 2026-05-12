@@ -622,6 +622,135 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   
 .fab-sec { width: 48px; height: 48px; border-radius: 50%; background: var(--terra); color: white; border: none; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(92,61,46,0.3); cursor: pointer; }
 .fab-sec:active { background: var(--terra-soft); }
+
+/* ── VUE BUDGET ── */
+.budget-kpis { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.budget-kpi {
+  flex: 1; min-width: 120px;
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.budget-kpi-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  line-height: 1;
+  display: block;
+  color: var(--brown);
+}
+.budget-kpi-num.c-sage  { color: var(--sage); }
+.budget-kpi-num.c-terra { color: var(--terra); }
+.budget-kpi-num.c-soft  { color: var(--text-soft); }
+.budget-kpi-label { font-size: 10px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; display: block; }
+
+.budget-charts { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.budget-chart-card {
+  flex: 1; min-width: 220px;
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.budget-chart-title {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--text-soft); margin-bottom: 10px; text-align: center;
+}
+.budget-chart-wrap { position: relative; height: 160px; display: flex; align-items: center; justify-content: center; }
+
+.budget-section {
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.budget-sec-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  background: var(--parchment);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.budget-sec-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 600; color: var(--brown); flex: 1;
+}
+.budget-sec-total {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; color: var(--terra); font-weight: 600;
+}
+.budget-sec-arrow { font-size: 10px; color: var(--text-soft); transition: transform 0.2s; }
+.budget-sec-open .budget-sec-arrow { transform: rotate(180deg); }
+
+.budget-table { width: 100%; border-collapse: collapse; }
+.budget-table th {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-soft); padding: 8px 14px; text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--cream);
+}
+.budget-table td { padding: 9px 14px; font-size: 13px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+.budget-table tr:last-child td { border-bottom: none; }
+.budget-table tr:hover td { background: var(--parchment); }
+.budget-td-label { color: var(--text); }
+.budget-td-qui { color: var(--text-mid); font-size: 12px; }
+.budget-td-cout { color: var(--terra); font-weight: 500; text-align: right; white-space: nowrap; }
+.budget-td-pec { min-width: 120px; }
+.budget-pec-select {
+  width: 100%; padding: 4px 8px; border: 1px solid var(--border);
+  border-radius: 7px; font-family: 'Jost', sans-serif; font-size: 12px;
+  background: white; color: var(--text); cursor: pointer;
+}
+.budget-pec-select:focus { outline: none; border-color: var(--terra-soft); }
+.budget-pec-display { font-size: 12px; color: var(--text-mid); font-style: italic; }
+.budget-grand-total {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; margin-top: 4px;
+  background: var(--brown); border-radius: 14px;
+  color: var(--cream);
+}
+.budget-grand-total-label {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;
+}
+.budget-grand-total-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 28px;
+}
+.budget-porteurs-bar {
+  display: flex; gap: 8px; margin-bottom: 20px; align-items: center; flex-wrap: wrap;
+}
+.budget-porteur-tag {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--parchment); border: 1px solid var(--border);
+  border-radius: 20px; padding: 4px 10px;
+  font-size: 12px; color: var(--text-mid);
+}
+.budget-porteur-del {
+  background: none; border: none; cursor: pointer; font-size: 11px;
+  color: var(--text-soft); opacity: 0.5; padding: 0 2px;
+}
+.budget-porteur-del:hover { opacity: 1; color: var(--red); }
+.budget-add-porteur {
+  display: flex; gap: 6px; align-items: center;
+}
+.budget-porteur-input {
+  padding: 5px 10px; border: 1px solid var(--border); border-radius: 20px;
+  font-family: 'Jost', sans-serif; font-size: 12px; background: white; color: var(--text);
+  width: 140px;
+}
+.budget-porteur-input:focus { outline: none; border-color: var(--terra-soft); }
+.btn-add-porteur {
+  padding: 5px 12px; background: var(--terra); color: white; border: none;
+  border-radius: 20px; font-size: 11px; cursor: pointer; font-family: 'Jost', sans-serif;
+  white-space: nowrap;
+}
+.budget-sec-body { display: none; }
+.budget-sec-open .budget-sec-body { display: block; }
   
 </style>
 </head>
@@ -676,6 +805,8 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   <!-- NAV PRINCIPALE MENU-->
   <div class="toolbar nav-toolbar">
     <button class="f-btn nav-btn on" id="nav-board" onclick="setView('board',this)">🌿 Le Board</button>
+    <button class="f-btn nav-btn" id="nav-retro" onclick="setView('retro',this)">🗓️ Rétro-Planning</button>
+    <button class="f-btn nav-btn" id="nav-budget" onclick="setView('budget',this)">💶 Budget</button>
     <button class="f-btn nav-btn" id="nav-sugg" onclick="setView('suggestions',this)">💡 Suggestions</button>
   </div>
 
@@ -689,6 +820,8 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 
   <div class="sections" id="sections"></div>
   <div id="view-suggestions" style="display:none;padding:14px 12px"></div>
+  <div id="view-retro"       style="display:none;padding:14px 12px"></div>
+  <div id="view-budget"      style="display:none;padding:14px 12px"></div>
 
   <div class="footer">
     Fait avec ❤️ pour Bruno & Élodie<br>
@@ -836,13 +969,14 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 </div>
 
 <script>
-const APP_VERSION = "0.9.0";
+const APP_VERSION = "0.10.0";
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbxwcrLxKqiwi51ivNG2EZsY3mE9iTVUrPF1T7QFlAePkEWTf-B-jtRONKDAJRhsJNnWWA/exec";
 
 let db = [];
 let suggestions = [];
+let porteurs = [];
 let filter = 'all';
-let currentView = 'board'; // board | suggestions
+let currentView = 'board'; // board | suggestions | budget
 
 // ── USER ──
 const USERS = {
@@ -907,12 +1041,15 @@ function isEditor() {
 function save() {
   localStorage.setItem('mariage_be_v3', JSON.stringify(db));
   localStorage.setItem('mariage_sugg_v1', JSON.stringify(suggestions));
+  localStorage.setItem('mariage_porteurs_v1', JSON.stringify(porteurs));
 }
 function load() {
   const s = localStorage.getItem('mariage_be_v3');
   if (s) { try { db = JSON.parse(s); } catch(e){} }
   const sg = localStorage.getItem('mariage_sugg_v1');
   if (sg) { try { suggestions = JSON.parse(sg); } catch(e){} }
+  const po = localStorage.getItem('mariage_porteurs_v1');
+  if (po) { try { porteurs = JSON.parse(po); } catch(e){} }
 }
 function setSyncMsg(msg, cls='') {
   const el = document.getElementById('sync');
@@ -944,6 +1081,7 @@ async function pullFromSheets() {
     if (d && d.sections && d.sections.length) {
       db = d.sections;
       if (Array.isArray(d.suggestions)) suggestions = d.suggestions;
+      if (Array.isArray(d.porteurs))    porteurs    = d.porteurs;
       save();
       setSyncMsg('✓ À jour', 'ok');
     } else {
@@ -1366,22 +1504,251 @@ function setView(view, btn) {
   currentView = view;
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
-  const filterBar = document.getElementById('filter-toolbar');
-  const boardView = document.getElementById('sections');
-  const suggView  = document.getElementById('view-suggestions');
-  const fab       = document.getElementById('fab-btn');
+  const filterBar  = document.getElementById('filter-toolbar');
+  const boardView  = document.getElementById('sections');
+  const suggView   = document.getElementById('view-suggestions');
+  const retroView  = document.getElementById('view-retro');
+  const budgetView = document.getElementById('view-budget');
+  const fab        = document.getElementById('fab-btn');
+  // tout masquer
+  filterBar.style.display  = 'none';
+  boardView.style.display  = 'none';
+  suggView.style.display   = 'none';
+  retroView.style.display  = 'none';
+  budgetView.style.display = 'none';
+  if (fab) fab.style.display = 'none';
   if (view === 'board') {
     filterBar.style.display = '';
     boardView.style.display = '';
-    suggView.style.display  = 'none';
     if (fab) fab.style.display = isEditor() ? 'flex' : 'none';
-  } else {
-    filterBar.style.display = 'none';
-    boardView.style.display = 'none';
-    suggView.style.display  = '';
-    if (fab) fab.style.display = 'none';
+  } else if (view === 'suggestions') {
+    suggView.style.display = '';
     renderSuggestions();
+  } else if (view === 'retro') {
+    retroView.style.display = '';
+    retroView.innerHTML = '<p style="text-align:center;color:var(--text-soft);font-size:13px;margin-top:40px">🗓️ Rétro-Planning — à venir</p>';
+  } else if (view === 'budget') {
+    budgetView.style.display = '';
+    renderBudget();
   }
+}
+
+// ── BUDGET ──
+const PIE_COLORS = ['#b85c38','#6b8f71','#8a6352','#b7950b','#5c3d2e','#ca6f1e','#9ab89f','#d4846a','#b8967e','#ddd0bc'];
+
+function renderBudget() {
+  const wrap = document.getElementById('view-budget');
+  if (!wrap) return;
+
+  // Données
+  const allItems = db.flatMap(s => s.items.map(it => ({ ...it, secName: s.name, secEmoji: s.emoji, secId: s.id })));
+  const itemsAvecCout = allItems.filter(it => parseFloat(it.budget) > 0);
+  const total = itemsAvecCout.reduce((sum, it) => sum + parseFloat(it.budget), 0);
+  const attribues = itemsAvecCout.filter(it => it.prise_en_charge).reduce((sum, it) => sum + parseFloat(it.budget), 0);
+  const nonAttribues = total - attribues;
+  const nbPostes = itemsAvecCout.length;
+
+  // KPIs
+  const kpisHtml = `
+    <div class="budget-kpis">
+      <div class="budget-kpi">
+        <span class="budget-kpi-num">${total.toLocaleString('fr-FR')} €</span>
+        <span class="budget-kpi-label">💰 Budget total</span>
+      </div>
+      <div class="budget-kpi">
+        <span class="budget-kpi-num c-sage">${attribues.toLocaleString('fr-FR')} €</span>
+        <span class="budget-kpi-label">✅ Attribués</span>
+      </div>
+      <div class="budget-kpi">
+        <span class="budget-kpi-num c-terra">${nonAttribues.toLocaleString('fr-FR')} €</span>
+        <span class="budget-kpi-label">❓ Non attribués</span>
+      </div>
+      <div class="budget-kpi">
+        <span class="budget-kpi-num c-soft">${nbPostes}</span>
+        <span class="budget-kpi-label">📦 Postes</span>
+      </div>
+    </div>`;
+
+  // Données camemberts
+  // Par porteur
+  const byPorteur = {};
+  itemsAvecCout.forEach(it => {
+    const k = it.prise_en_charge || '— Non attribué';
+    byPorteur[k] = (byPorteur[k] || 0) + parseFloat(it.budget);
+  });
+  // Par section
+  const bySection = {};
+  itemsAvecCout.forEach(it => {
+    const k = it.secEmoji + ' ' + it.secName;
+    bySection[k] = (bySection[k] || 0) + parseFloat(it.budget);
+  });
+
+  // Gestion porteurs (éditeurs seulement)
+  const porteursMgmt = isEditor() ? `
+    <div style="margin-bottom:12px">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-soft);margin-bottom:8px">Porteurs de coûts</div>
+      <div class="budget-porteurs-bar" id="porteurs-bar">
+        ${porteurs.map(p => `
+          <div class="budget-porteur-tag">
+            <span>${p.nom}</span>
+            <button class="budget-porteur-del" onclick="deletePorteur('${p.id}')">✕</button>
+          </div>`).join('')}
+        <div class="budget-add-porteur">
+          <input class="budget-porteur-input" id="new-porteur-input" placeholder="Nouveau porteur…" onkeydown="if(event.key==='Enter')addPorteur()">
+          <button class="btn-add-porteur" onclick="addPorteur()">+ Ajouter</button>
+        </div>
+      </div>
+    </div>` : '';
+
+  // Tableau par section
+  const sectionsAvecCout = db.filter(s => s.items.some(it => parseFloat(it.budget) > 0));
+  const tablesHtml = sectionsAvecCout.map(sec => {
+    const items = sec.items.filter(it => parseFloat(it.budget) > 0);
+    const sTotal = items.reduce((sum, it) => sum + parseFloat(it.budget), 0);
+    return `
+      <div class="budget-section budget-sec-open">
+        <div class="budget-sec-head" onclick="this.parentElement.classList.toggle('budget-sec-open')">
+          <span style="font-size:18px">${sec.emoji}</span>
+          <span class="budget-sec-name">${sec.name}</span>
+          <span class="budget-sec-total">${sTotal.toLocaleString('fr-FR')} €</span>
+          <span class="budget-sec-arrow">▼</span>
+        </div>
+        <div class="budget-sec-body">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th style="width:35%">Libellé</th>
+                <th style="width:20%">À qui ?</th>
+                <th style="width:15%;text-align:right">Coût</th>
+                <th style="width:30%">Prise en Charge</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${items.map(it => `
+                <tr>
+                  <td class="budget-td-label">${it.label}</td>
+                  <td class="budget-td-qui">${it.responsable || '<span style="opacity:0.4">—</span>'}</td>
+                  <td class="budget-td-cout">${parseFloat(it.budget).toLocaleString('fr-FR')} €</td>
+                  <td class="budget-td-pec">
+                    ${isEditor()
+                      ? `<select class="budget-pec-select" onchange="savePEC('${sec.id}','${it.id}',this.value)">
+                          <option value="">— Choisir —</option>
+                          ${porteurs.map(p => `<option value="${p.nom}" ${it.prise_en_charge===p.nom?'selected':''}>${p.nom}</option>`).join('')}
+                        </select>`
+                      : `<span class="budget-pec-display">${it.prise_en_charge || '—'}</span>`
+                    }
+                  </td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Grand total
+  const grandTotal = `
+    <div class="budget-grand-total">
+      <span class="budget-grand-total-label">Total général</span>
+      <span class="budget-grand-total-num">${total.toLocaleString('fr-FR')} €</span>
+    </div>`;
+
+  wrap.innerHTML = kpisHtml + porteursMgmt + `<div id="budget-charts" class="budget-charts"></div>` + tablesHtml + grandTotal;
+
+  // Dessiner les camemberts après injection
+  drawPie('pie-porteur', byPorteur, total);
+  drawPie('pie-section', bySection, total);
+
+  // Injecter les canvas dans les cartes graphiques
+  document.getElementById('budget-charts').innerHTML = `
+    <div class="budget-chart-card">
+      <div class="budget-chart-title">Répartition par porteur</div>
+      <div class="budget-chart-wrap"><canvas id="pie-porteur" width="160" height="160"></canvas></div>
+      <div id="legend-porteur" style="margin-top:10px"></div>
+    </div>
+    <div class="budget-chart-card">
+      <div class="budget-chart-title">Répartition par section</div>
+      <div class="budget-chart-wrap"><canvas id="pie-section" width="160" height="160"></canvas></div>
+      <div id="legend-section" style="margin-top:10px"></div>
+    </div>`;
+
+  // Redessiner avec les vrais canvas
+  setTimeout(() => {
+    drawPie('pie-porteur', byPorteur, total, 'legend-porteur');
+    drawPie('pie-section', bySection, total, 'legend-section');
+  }, 50);
+}
+
+function drawPie(canvasId, data, total, legendId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const entries = Object.entries(data);
+  if (!entries.length || total === 0) {
+    ctx.fillStyle = '#ddd0bc';
+    ctx.beginPath(); ctx.arc(80, 80, 70, 0, Math.PI * 2); ctx.fill();
+    return;
+  }
+  let angle = -Math.PI / 2;
+  entries.forEach(([label, val], i) => {
+    const slice = (val / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(80, 80);
+    ctx.arc(80, 80, 70, angle, angle + slice);
+    ctx.closePath();
+    ctx.fillStyle = PIE_COLORS[i % PIE_COLORS.length];
+    ctx.fill();
+    ctx.strokeStyle = '#f7f2ea';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    angle += slice;
+  });
+  // Légende
+  if (legendId) {
+    const leg = document.getElementById(legendId);
+    if (!leg) return;
+    leg.innerHTML = entries.map(([label, val], i) => `
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-mid);margin-bottom:3px">
+        <span style="width:10px;height:10px;border-radius:50%;background:${PIE_COLORS[i % PIE_COLORS.length]};flex-shrink:0;display:inline-block"></span>
+        <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${label}</span>
+        <span style="font-weight:500;color:var(--terra)">${val.toLocaleString('fr-FR')} €</span>
+      </div>`).join('');
+  }
+}
+
+function savePEC(secId, itemId, val) {
+  findItem(secId, itemId).prise_en_charge = val;
+  save(); pushToSheets();
+  // re-render légendes sans tout reconstruire
+  renderBudget();
+}
+
+async function addPorteur() {
+  const input = document.getElementById('new-porteur-input');
+  const nom = input.value.trim();
+  if (!nom) return;
+  if (porteurs.find(p => p.nom.toLowerCase() === nom.toLowerCase())) { input.value=''; return; }
+  const newP = { id: 'p_' + Date.now(), nom };
+  porteurs.push(newP);
+  save();
+  input.value = '';
+  await fetch(SHEETS_URL, {
+    method: 'POST', mode: 'no-cors',
+    body: JSON.stringify({ action: 'addPorteur', data: newP }),
+    headers: { 'Content-Type': 'text/plain' }
+  });
+  renderBudget();
+}
+
+async function deletePorteur(id) {
+  if (!confirm('Supprimer ce porteur ?')) return;
+  porteurs = porteurs.filter(p => p.id !== id);
+  save();
+  await fetch(SHEETS_URL, {
+    method: 'POST', mode: 'no-cors',
+    body: JSON.stringify({ action: 'deletePorteur', data: { id } }),
+    headers: { 'Content-Type': 'text/plain' }
+  });
+  renderBudget();
 }
 
 // ── SUGGESTIONS ──
