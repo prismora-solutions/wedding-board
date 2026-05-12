@@ -749,7 +749,7 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
       <input class="add-form-input" id="af-valeur" placeholder="">
     </div>
     <div class="add-form-row">
-      <span class="add-form-label">Contact</span>
+      <span class="add-form-label">Qui ?</span>
       <input class="add-form-input" id="af-responsable" placeholder="Qui ?">
     </div>
     <div class="add-form-row">
@@ -1064,8 +1064,8 @@ function renderItem(it, secId) {
     `<input class="field-input" id="val-${it.id}" value="${it.valeur||''}" placeholder="Saisir…"
       onchange="quickSave('${secId}','${it.id}','valeur',this.value)" onclick="event.stopPropagation()">`);
 
-  const fContact = fieldRowHtml('👤', 'Contact', !it.responsable,
-    `<input class="field-input" id="res-${it.id}" value="${it.responsable||''}" placeholder="Qui ?"
+  const fContact = fieldRowHtml('👤', 'Qui ?', !it.responsable,
+    `<input class="field-input" id="res-${it.id}" value="${it.responsable||''}" placeholder="Nom, Prestataire, ..."
       onchange="quickSave('${secId}','${it.id}','responsable',this.value)" onclick="event.stopPropagation()">`);
 
   const fBudget  = fieldRowHtml('💶', 'Coût', !it.budget,
