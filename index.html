@@ -508,6 +508,80 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .btn-add-confirm { flex: 1; padding: 13px; background: var(--terra); color: white; border: none; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; }
 .btn-add-cancel { padding: 13px 20px; background: var(--parchment); color: var(--text-mid); border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; }
 
+/* ── VUE RÉTRO-PLANNING ── */
+.retro-wrap { padding: 0 0 80px; }
+.retro-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.retro-topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--brown); }
+.retro-week-bar {
+  display: flex; gap: 6px; margin-bottom: 14px;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+.retro-week-bar::-webkit-scrollbar { display: none; }
+.retro-week-chip {
+  flex-shrink: 0; padding: 5px 14px;
+  border-radius: 20px; border: 1.5px solid var(--border);
+  background: var(--warm); font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500; color: var(--text-mid);
+  cursor: pointer; white-space: nowrap; transition: all 0.15s;
+}
+.retro-week-chip:hover { border-color: var(--terra-soft); color: var(--terra); }
+.retro-week-chip.active { background: var(--brown); color: var(--cream); border-color: var(--brown); }
+.retro-week-chip.chip-wedding { border-color: var(--terra); color: var(--terra); }
+.retro-week-chip.chip-wedding.active { background: var(--terra); color: white; }
+.btn-retro-add { display: flex; align-items: center; gap: 6px; padding: 7px 14px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; }
+.btn-retro-add:hover { background: var(--terra-soft); }
+.retro-day { margin-bottom: 6px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.retro-day-head { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--parchment); border-bottom: 1px solid var(--border-soft); }
+.retro-day-head.today { background: var(--brown); }
+.retro-day-head.today .retro-day-label, .retro-day-head.today .retro-day-date { color: var(--cream); }
+.retro-day-head.wedding { background: var(--terra); }
+.retro-day-head.wedding .retro-day-label, .retro-day-head.wedding .retro-day-date { color: var(--cream); }
+.retro-day-label { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--brown); flex: 1; }
+.retro-day-date { font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1px; }
+.retro-day-badge { font-size: 10px; font-weight: 600; letter-spacing: 1px; padding: 2px 8px; border-radius: 10px; background: rgba(255,255,255,0.25); color: white; text-transform: uppercase; }
+.retro-day-body { background: var(--warm); }
+.retro-allday { display: flex; align-items: center; gap: 8px; padding: 7px 16px; background: var(--sage-pale); border-bottom: 1px solid var(--border-soft); font-size: 12px; color: var(--sage); cursor: pointer; }
+.retro-allday:hover { background: var(--sage-soft); color: white; }
+.retro-allday-label { flex: 1; font-weight: 500; }
+.retro-event { display: grid; grid-template-columns: 52px 1fr; border-bottom: 1px solid var(--border-soft); cursor: pointer; transition: background 0.15s; }
+.retro-event:last-child { border-bottom: none; }
+.retro-event:hover { background: var(--parchment); }
+.retro-event-time { display: flex; align-items: flex-start; justify-content: center; padding: 12px 0; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 600; color: var(--terra); border-right: 2px solid var(--border-soft); }
+.retro-event-body { padding: 10px 14px; }
+.retro-event-label { font-size: 14px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.retro-event-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.retro-meta-item { font-size: 11px; color: var(--text-soft); display: flex; align-items: center; gap: 3px; }
+.retro-meta-item a { color: var(--terra); text-decoration: none; }
+.retro-event-details { display: none; padding: 10px 14px 12px; background: var(--cream); border-top: 1px dashed var(--border); grid-column: 1 / -1; }
+.retro-event.open .retro-event-details { display: block; }
+.retro-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 520px) { .retro-detail-grid { grid-template-columns: 1fr; } }
+.retro-detail-field { display: flex; flex-direction: column; gap: 3px; }
+.retro-detail-field.full { grid-column: 1 / -1; }
+.retro-detail-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); }
+.retro-detail-input { padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 13px; color: var(--text); background: white; width: 100%; box-sizing: border-box; }
+.retro-detail-input:focus { outline: none; border-color: var(--terra-soft); }
+.retro-detail-input[readonly] { background: var(--warm); color: var(--text-soft); cursor: default; }
+.retro-detail-actions { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; }
+.btn-retro-save { padding: 6px 14px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
+.btn-retro-del { padding: 6px 14px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
+.retro-empty-day { padding: 12px 16px; font-size: 12px; color: var(--text-soft); font-style: italic; text-align: center; }
+.retro-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(50,30,20,0.5); z-index: 500; align-items: flex-end; justify-content: center; }
+.retro-modal-overlay.show { display: flex; }
+.retro-modal { background: var(--cream); border-radius: 20px 20px 0 0; padding: 24px 20px 32px; width: 100%; max-width: 860px; box-shadow: 0 -8px 40px rgba(50,30,20,0.2); max-height: 90vh; overflow-y: auto; }
+.retro-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--brown); margin-bottom: 16px; }
+.retro-modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 520px) { .retro-modal-grid { grid-template-columns: 1fr; } }
+.retro-modal-field { display: flex; flex-direction: column; gap: 4px; }
+.retro-modal-field.full { grid-column: 1 / -1; }
+.retro-modal-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); }
+.retro-modal-input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; color: var(--text); background: white; width: 100%; box-sizing: border-box; }
+.retro-modal-input:focus { outline: none; border-color: var(--terra-soft); }
+.retro-modal-actions { display: flex; gap: 10px; margin-top: 16px; justify-content: flex-end; }
+.btn-retro-confirm { padding: 9px 20px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn-retro-cancel { padding: 9px 20px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 13px; cursor: pointer; }
+
 /* ── SECTIONS QUICKNAV ── */
 .sections-nav-wrap {
   display: flex;
@@ -888,6 +962,45 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   <div class="sections" id="sections"></div>
   <div id="view-suggestions" style="display:none;padding:14px 12px"></div>
   <div id="view-retro"       style="display:none;padding:14px 12px"></div>
+  <div id="retro-modal-overlay" class="retro-modal-overlay" onclick="if(event.target===this)closeRetroModal()">
+    <div class="retro-modal">
+      <div class="retro-modal-title" id="retro-modal-title">➕ Nouvel événement</div>
+      <div class="retro-modal-grid">
+        <div class="retro-modal-field full">
+          <label class="retro-modal-label">Libellé *</label>
+          <input class="retro-modal-input" id="rm-label" placeholder="Ex: Livraison fleurs">
+        </div>
+        <div class="retro-modal-field">
+          <label class="retro-modal-label">Date *</label>
+          <input class="retro-modal-input" id="rm-date" type="date">
+        </div>
+        <div class="retro-modal-field">
+          <label class="retro-modal-label">Heure</label>
+          <input class="retro-modal-input" id="rm-heure" type="time" placeholder="HH:MM">
+        </div>
+        <div class="retro-modal-field">
+          <label class="retro-modal-label">Durée (min)</label>
+          <input class="retro-modal-input" id="rm-duree" type="number" placeholder="60">
+        </div>
+        <div class="retro-modal-field">
+          <label class="retro-modal-label">Responsable</label>
+          <input class="retro-modal-input" id="rm-responsable" placeholder="Qui ?">
+        </div>
+        <div class="retro-modal-field full">
+          <label class="retro-modal-label">Adresse</label>
+          <input class="retro-modal-input" id="rm-adresse" placeholder="Lieu…">
+        </div>
+        <div class="retro-modal-field full">
+          <label class="retro-modal-label">Note</label>
+          <input class="retro-modal-input" id="rm-note" placeholder="Détails…">
+        </div>
+      </div>
+      <div class="retro-modal-actions">
+        <button class="btn-retro-cancel" onclick="closeRetroModal()">Annuler</button>
+        <button class="btn-retro-confirm" onclick="saveRetroModal()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
   <div id="view-budget"      style="display:none;padding:14px 12px"></div>
 
   <div class="footer">
@@ -1161,6 +1274,7 @@ function render() {
   const wrap = document.getElementById('sections');
   wrap.innerHTML = '';
   db.forEach(sec => {
+    if (sec.id === RETRO_SEC_ID) return; // masqué du Board
     const urgenceOrder = { red: 0, orange: 1, yellow: 2, none: 3, '': 3 };
     const visible = filteredItems(sec.items).sort((a, b) => (urgenceOrder[a.urgence] ?? 3) - (urgenceOrder[b.urgence] ?? 3));
     if (filter !== 'all' && visible.length === 0) return;
@@ -1596,7 +1710,7 @@ function setView(view, btn) {
     renderSuggestions();
   } else if (view === 'retro') {
     retroView.style.display = '';
-    retroView.innerHTML = '<p style="text-align:center;color:var(--text-soft);font-size:13px;margin-top:40px">🗓️ Rétro-Planning — à venir</p>';
+    renderRetro();
   } else if (view === 'budget') {
     budgetView.style.display = '';
     renderBudget();
@@ -1652,6 +1766,284 @@ function focusSection(id) {
     renderSectionsNav(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+}
+
+// ── RÉTRO-PLANNING ──
+const RETRO_SEC_ID = '__retro__';
+const RETRO_SEC = { id: RETRO_SEC_ID, name: 'Rétro-Planning', emoji: '🗓️', items: [] };
+
+function getRetroSection() {
+  return db.find(s => s.id === RETRO_SEC_ID) || RETRO_SEC;
+}
+
+function getRetroEvents() {
+  // Événements issus du Board (toutes sections sauf __retro__) avec date remplie
+  const boardEvts = db
+    .filter(s => s.id !== RETRO_SEC_ID)
+    .flatMap(s => s.items
+      .filter(it => it.date)
+      .map(it => ({ ...it, _secName: s.name, _secEmoji: s.emoji, _secId: s.id, _native: false }))
+    );
+  // Événements natifs rétro
+  const retroEvts = getRetroSection().items
+    .filter(it => it.date)
+    .map(it => ({ ...it, _secName: 'Rétro', _secEmoji: '🗓️', _secId: RETRO_SEC_ID, _native: true }));
+  return [...boardEvts, ...retroEvts];
+}
+
+let _retroWeek = 'all'; // 'all' | 'YYYY-Wnn'
+
+function getRetroWeeks() {
+  // Génère les semaines de la fenêtre juin → 4 juillet
+  const weeks = [];
+  const seen = new Set();
+  const cur = new Date('2026-06-01');
+  const end = new Date('2026-07-04');
+  while (cur <= end) {
+    const mon = new Date(cur);
+    mon.setDate(cur.getDate() - ((cur.getDay() + 6) % 7)); // lundi
+    const key = mon.toISOString().substring(0,10);
+    if (!seen.has(key)) {
+      seen.add(key);
+      const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+      const isWeddingWeek = mon <= new Date('2026-06-27') && sun >= new Date('2026-06-27');
+      weeks.push({ key, mon, sun, isWeddingWeek });
+    }
+    cur.setDate(cur.getDate() + 1);
+  }
+  return weeks;
+}
+
+function retroWeekLabel(w) {
+  const MOIS = ['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
+  return `${w.mon.getDate()} ${MOIS[w.mon.getMonth()]} → ${w.sun.getDate()} ${MOIS[w.sun.getMonth()]}`;
+}
+
+function renderRetro(weekKey) {
+  if (weekKey !== undefined) _retroWeek = weekKey;
+  const wrap = document.getElementById('view-retro');
+  if (!wrap) return;
+
+  // Fenêtre complète
+  const globalStart = new Date('2026-06-01');
+  const globalEnd   = new Date('2026-07-04');
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  // Fenêtre filtrée selon semaine
+  let start, end;
+  if (_retroWeek === 'all') {
+    start = globalStart; end = globalEnd;
+  } else {
+    const mon = new Date(_retroWeek + 'T12:00:00');
+    const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+    start = mon > globalStart ? mon : globalStart;
+    end   = sun < globalEnd   ? sun : globalEnd;
+  }
+
+  const events = getRetroEvents();
+  const byDay = {};
+  events.forEach(ev => {
+    const d = ev.date.substring(0, 10);
+    if (!byDay[d]) byDay[d] = [];
+    byDay[d].push(ev);
+  });
+
+  const days = [];
+  const cur = new Date(start);
+  while (cur <= end) {
+    days.push(cur.toISOString().substring(0, 10));
+    cur.setDate(cur.getDate() + 1);
+  }
+
+  const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const MOIS  = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const weeks = getRetroWeeks();
+
+  // Chips semaines
+  const weeksBar = `<div class="retro-week-bar">
+    <button class="retro-week-chip ${_retroWeek==='all'?'active':''}" onclick="renderRetro('all')">✦ Tout</button>
+    ${weeks.map(w => `
+      <button class="retro-week-chip ${w.isWeddingWeek?'chip-wedding':''} ${_retroWeek===w.key?'active':''}"
+        onclick="renderRetro('${w.key}')">
+        ${w.isWeddingWeek ? '💒 ' : ''}${retroWeekLabel(w)}
+      </button>`).join('')}
+  </div>`;
+
+  let html = `<div class="retro-wrap">
+    <div class="retro-topbar">
+      <span class="retro-topbar-title">🗓️ Rétro-Planning</span>
+      ${isEditor() ? `<button class="btn-retro-add" onclick="openRetroModal()">+ Événement</button>` : ''}
+    </div>
+    ${weeksBar}`;
+
+  let hasAny = false;
+  days.forEach(dateStr => {
+    const d = new Date(dateStr + 'T12:00:00');
+    const isToday   = dateStr === today.toISOString().substring(0,10);
+    const isWedding = dateStr === '2026-06-27';
+    const evts = byDay[dateStr] || [];
+    const allDay = evts.filter(ev => !ev.heure_debut);
+    const timed  = evts.filter(ev => ev.heure_debut).sort((a,b) => a.heure_debut.localeCompare(b.heure_debut));
+
+    if (!evts.length && !isToday && !isWedding) return;
+    hasAny = true;
+
+    let headClass = 'retro-day-head';
+    if (isWedding) headClass += ' wedding';
+    else if (isToday) headClass += ' today';
+
+    html += `<div class="retro-day" id="retro-day-${dateStr}">
+      <div class="${headClass}">
+        <span class="retro-day-label">${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}</span>
+        ${isWedding ? `<span class="retro-day-badge">💒 Mariage</span>` : ''}
+        ${isToday && !isWedding ? `<span class="retro-day-badge" style="background:rgba(255,255,255,0.2);color:var(--cream)">Aujourd'hui</span>` : ''}
+        <span class="retro-day-date">${d.getFullYear()}</span>
+      </div>
+      <div class="retro-day-body">`;
+
+    if (!evts.length) {
+      html += `<div class="retro-empty-day">Aucun événement</div>`;
+    } else {
+      allDay.forEach(ev => { html += retroAlldayHtml(ev); });
+      timed.forEach(ev =>  { html += retroEventHtml(ev); });
+    }
+    html += `</div></div>`;
+  });
+
+  if (!hasAny) html += `<div style="text-align:center;padding:40px;color:var(--text-soft);font-size:13px;font-style:italic">Aucun événement cette semaine.</div>`;
+
+  html += `</div>`;
+  wrap.innerHTML = html;
+
+  // Scroll : si vue complète → aujourd'hui ; si semaine → haut
+  setTimeout(() => {
+    if (_retroWeek === 'all') {
+      const todayEl = document.getElementById('retro-day-' + today.toISOString().substring(0,10));
+      const first   = wrap.querySelector('[id^="retro-day-"]');
+      (todayEl || first)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 100);
+}
+
+function retroAlldayHtml(ev) {
+  const id = ev.id;
+  return `<div class="retro-allday" onclick="toggleRetroEvent('allday-${id}')">
+    <span>${ev._secEmoji}</span>
+    <span class="retro-allday-label">${ev.label}</span>
+    ${ev.responsable ? `<span class="retro-meta-item">👤 ${ev.responsable}</span>` : ''}
+    ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${ev._secId}','${id}')" style="font-size:11px;opacity:0.5;margin-left:6px">✏️</span>` : ''}
+  </div>`;
+}
+
+function retroEventHtml(ev) {
+  const id = ev.id;
+  const dureeStr = ev.duree ? `${ev.duree} min` : '';
+  const mapsUrl  = ev.adresse ? `https://maps.google.com/?q=${encodeURIComponent(ev.adresse)}` : '';
+  return `<div class="retro-event" id="retro-ev-${id}">
+    <div class="retro-event-time">${ev.heure_debut}</div>
+    <div class="retro-event-body" onclick="toggleRetroEvent('ev-${id}')">
+      <div class="retro-event-label">
+        <span>${ev._secEmoji}</span>
+        <span>${ev.label}</span>
+        ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${ev._secId}','${id}')" style="font-size:11px;opacity:0.5;margin-left:auto">✏️</span>` : ''}
+      </div>
+      <div class="retro-event-meta">
+        ${dureeStr ? `<span class="retro-meta-item">⏱ ${dureeStr}</span>` : ''}
+        ${ev.responsable ? `<span class="retro-meta-item">👤 ${ev.responsable}</span>` : ''}
+        ${ev.adresse ? `<span class="retro-meta-item">📍 <a href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()">${ev.adresse}</a></span>` : ''}
+      </div>
+    </div>
+    <div class="retro-event-details" id="retro-detail-${id}">
+      ${ev.commentaire ? `<p style="font-size:13px;color:var(--text-mid);margin:0 0 6px">${ev.commentaire}</p>` : '<p style="font-size:12px;color:var(--text-soft);font-style:italic;margin:0">Aucune note.</p>'}
+    </div>
+  </div>`;
+}
+
+function toggleRetroEvent(uid) {
+  const el = document.getElementById('retro-ev-' + uid.replace('ev-','').replace('allday-',''));
+  if (el) el.classList.toggle('open');
+  const det = document.getElementById('retro-detail-' + uid.replace('ev-','').replace('allday-',''));
+  if (det) det.style.display = det.style.display === 'block' ? 'none' : 'block';
+}
+
+// ── Modal retro ──
+let _retroEditSecId = null;
+let _retroEditItemId = null;
+
+function openRetroModal() {
+  _retroEditSecId = null; _retroEditItemId = null;
+  document.getElementById('retro-modal-title').textContent = '➕ Nouvel événement';
+  ['label','date','heure','duree','responsable','adresse','note'].forEach(f => {
+    const el = document.getElementById('rm-' + f);
+    if (el) el.value = '';
+  });
+  document.getElementById('retro-modal-overlay').classList.add('show');
+}
+
+function openRetroEdit(secId, itemId) {
+  const sec  = db.find(s => s.id === secId);
+  const item = sec?.items.find(it => it.id === itemId);
+  if (!item) return;
+  _retroEditSecId  = secId;
+  _retroEditItemId = itemId;
+  document.getElementById('retro-modal-title').textContent = '✏️ Modifier l\'événement';
+  document.getElementById('rm-label').value       = item.label       || '';
+  document.getElementById('rm-date').value        = item.date        || '';
+  document.getElementById('rm-heure').value       = item.heure_debut || '';
+  document.getElementById('rm-duree').value       = item.duree       || '';
+  document.getElementById('rm-responsable').value = item.responsable || '';
+  document.getElementById('rm-adresse').value     = item.adresse     || '';
+  document.getElementById('rm-note').value        = item.commentaire || '';
+  document.getElementById('retro-modal-overlay').classList.add('show');
+}
+
+function closeRetroModal() {
+  document.getElementById('retro-modal-overlay').classList.remove('show');
+}
+
+function saveRetroModal() {
+  const label = document.getElementById('rm-label').value.trim();
+  const date  = document.getElementById('rm-date').value;
+  if (!label || !date) { alert('Libellé et date obligatoires.'); return; }
+
+  if (_retroEditSecId && _retroEditItemId) {
+    // Modifier item existant
+    const item = findItem(_retroEditSecId, _retroEditItemId);
+    if (item) {
+      item.label       = label;
+      item.date        = date;
+      item.heure_debut = document.getElementById('rm-heure').value;
+      item.duree       = document.getElementById('rm-duree').value;
+      item.responsable = document.getElementById('rm-responsable').value;
+      item.adresse     = document.getElementById('rm-adresse').value;
+      item.commentaire = document.getElementById('rm-note').value;
+    }
+  } else {
+    // Nouvel événement natif → section __retro__
+    let retroSec = db.find(s => s.id === RETRO_SEC_ID);
+    if (!retroSec) {
+      retroSec = { id: RETRO_SEC_ID, name: 'Rétro-Planning', emoji: '🗓️', items: [] };
+      db.push(retroSec);
+    }
+    retroSec.items.push({
+      id:          'r_' + Date.now(),
+      type:        'info',
+      label,
+      date,
+      heure_debut: document.getElementById('rm-heure').value,
+      duree:       document.getElementById('rm-duree').value,
+      responsable: document.getElementById('rm-responsable').value,
+      adresse:     document.getElementById('rm-adresse').value,
+      commentaire: document.getElementById('rm-note').value,
+      valeur: '', budget: '', urgence: 'none', statut: 'todo',
+      lien: '', prise_en_charge: '', comments: []
+    });
+  }
+  save(); pushToSheets();
+  closeRetroModal();
+  renderRetro();
 }
 
 // ── BUDGET ──
