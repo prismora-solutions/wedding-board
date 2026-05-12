@@ -164,6 +164,7 @@ body {
   font-size: 12px;
   background: white;
   color: var(--text);
+  text-align: left;
 }
 .field-input:focus { outline: none; border-color: var(--terra-soft); background: white; }
 .field-input.note-input {
@@ -873,9 +874,12 @@ function renderItem(it, secId) {
     `<input class="field-input" id="bde-${it.id}" value="${it.budget||''}" placeholder="€" type="number"
       onchange="quickSave('${secId}','${it.id}','budget',this.value)" onclick="event.stopPropagation()">`);
 
-  const fDate    = fieldRowHtml('📅', 'Date', !it.date,
-    `<input type="date" class="field-input ${it.date?'has-val':''}" id="dat-${it.id}" value="${it.date||''}"
-      onchange="this.classList.add('has-val'); quickSave('${secId}','${it.id}','date',this.value)" onclick="event.stopPropagation()">`);
+  const fDate = fieldRowHtml('📅', 'Date', !it.date,
+    `<div style="display:flex;align-items:center;gap:6px;flex:1;max-width:340px">
+      <input type="date" class="field-input ${it.date?'has-val':''}" id="dat-${it.id}" value="${it.date||''}" style="flex:1;max-width:none"
+        onchange="this.classList.add('has-val'); quickSave('${secId}','${it.id}','date',this.value)" onclick="event.stopPropagation()">
+      ${it.date ? `<button onclick="event.stopPropagation();clearDate('${secId}','${it.id}')" style="background:none;border:none;cursor:pointer;font-size:14px;opacity:0.4;flex-shrink:0;padding:2px">✕</button>` : ''}
+    </div>`);
 
   const fNote    = fieldRowHtml('💬', 'Note', !it.commentaire,
     `<textarea class="field-input note-input" id="com-${it.id}" placeholder="Note libre…"
@@ -924,6 +928,14 @@ function toggleComments(itemId) {
   if (list) list.style.display = list.style.display === 'none' ? 'flex' : 'none';
 }
 
+function clearDate(secId, itemId) {
+  const it = findItem(secId, itemId);
+  it.date = '';
+  const inp = document.getElementById('dat-' + itemId);
+  if (inp) { inp.value = ''; inp.classList.remove('has-val'); }
+  save(); pushToSheets(); render();
+}
+  
 function toggleCommentInput(itemId) {
   const row = document.getElementById('comment-input-' + itemId);
   row.classList.toggle('show');
