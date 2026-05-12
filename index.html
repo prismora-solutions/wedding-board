@@ -634,7 +634,7 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
     <h1>Bruno <em>&</em> Élodie</h1>
     <div class="header-sub">Meillon · 27 juin 2026</div>
     <div class="header-countdown">J — <span id="jcount">?</span> jours</div>
-    <div class="header-user" id="header-user" onclick="changeUser()" style="display:inline-flex">
+    <div class="header-user" id="header-user" onclick="changeUser()" style="display:none">
       <span id="header-user-emoji"></span>
       <span id="header-user-name"></span>
       <span style="opacity:0.5;font-size:10px">✏️</span>
@@ -1507,6 +1507,13 @@ function navSection(dir) {
   }
 }
 
+function initUser() {
+  if (!currentUser) {
+    document.getElementById('who-overlay').classList.add('show');
+  } else {
+    showUserBadge();
+  }
+}
 // ── INIT ──
 load();
 render();
