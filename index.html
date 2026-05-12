@@ -605,6 +605,11 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   overflow-y: auto;
   box-shadow: 0 -4px 30px rgba(92,61,46,0.15);
 }
+
+.fab-nav { position: fixed; bottom: 80px; left: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 100; }
+.fab-sec { width: 40px; height: 40px; border-radius: 50%; background: var(--brown); color: var(--cream); border: none; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(92,61,46,0.25); cursor: pointer; opacity: 0.85; }
+.fab-sec:active { background: var(--terra); }
+  
 </style>
 </head>
 <body>
@@ -679,6 +684,10 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 </div>
 
 <button class="fab" id="fab-btn" onclick="openAddModal()">+</button>
+<div class="fab-nav">
+  <button class="fab-sec" id="fab-up" onclick="navSection(-1)" title="Section précédente">↑</button>
+  <button class="fab-sec" id="fab-down" onclick="navSection(1)" title="Section suivante">↓</button>
+</div>
 
 <div class="add-overlay" id="add-overlay" onclick="if(event.target===this)closeAddModal()">
   <div class="add-modal">
@@ -1452,6 +1461,16 @@ async function pushSuggestion(action, data) {
       headers: { 'Content-Type': 'text/plain' }
     });
   } catch(e) { console.log('sugg error', e); }
+}
+
+function navSection(dir) {
+  const ids = db.map(s => 'sec-' + s.id);
+  const tops = ids.map(id => ({ id, top: document.getElementById(id)?.getBoundingClientRect().top }));
+  const current = tops.filter(t => t.top <= 10).pop();
+  const currentIdx = current ? ids.indexOf(current.id) : -1;
+  const targetIdx = currentIdx + dir;
+  if (targetIdx < 0 || targetIdx >= ids.length) return;
+  document.getElementById(ids[targetIdx])?.scrollIntoView({ behavior: 'smooth' });
 }
 
 // ── INIT ──
