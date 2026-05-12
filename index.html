@@ -508,7 +508,38 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .btn-add-confirm { flex: 1; padding: 13px; background: var(--terra); color: white; border: none; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; }
 .btn-add-cancel { padding: 13px 20px; background: var(--parchment); color: var(--text-mid); border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; }
 
-/* ── NAVIGATION ── */
+/* ── SECTIONS QUICKNAV ── */
+.sections-nav {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border-soft);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.sections-nav::-webkit-scrollbar { display: none; }
+.sec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--warm);
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-mid);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.sec-chip:hover { border-color: var(--terra-soft); color: var(--terra); background: var(--terra-pale); }
+.sec-chip.active { background: var(--brown); color: var(--cream); border-color: var(--brown); }
 .nav-toolbar {
   border-bottom: 2px solid var(--border);
   display: flex;
@@ -828,6 +859,9 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
     <button class="f-btn nav-btn" id="nav-sugg" onclick="setView('suggestions',this)">💡 Suggestions</button>
   </div>
 
+  <!-- SECTIONS QUICKNAV -->
+  <div class="sections-nav" id="sections-nav" style="display:none"></div>
+
   <!-- FILTRES BOARD -->
   <div class="toolbar filter-toolbar" id="filter-toolbar">
     <button class="f-btn on" onclick="setFilter('all',this)">Tout</button>
@@ -1137,6 +1171,7 @@ function render() {
   });
   const diff = Math.ceil((new Date('2026-06-27') - new Date()) / 86400000);
   document.getElementById('jcount').textContent = diff;
+  if (currentView === 'board') renderSectionsNav();
   setTimeout(() => {
     document.querySelectorAll('.note-input').forEach(el => {
       el.style.height = 'auto';
@@ -1529,16 +1564,19 @@ function setView(view, btn) {
   const retroView  = document.getElementById('view-retro');
   const budgetView = document.getElementById('view-budget');
   const fab        = document.getElementById('fab-btn');
+  const sectionsNav = document.getElementById('sections-nav');
   // tout masquer
   filterBar.style.display  = 'none';
   boardView.style.display  = 'none';
   suggView.style.display   = 'none';
   retroView.style.display  = 'none';
   budgetView.style.display = 'none';
+  if (sectionsNav) sectionsNav.style.display = 'none';
   if (fab) fab.style.display = 'none';
   if (view === 'board') {
     filterBar.style.display = '';
     boardView.style.display = '';
+    if (sectionsNav) { sectionsNav.style.display = ''; renderSectionsNav(); }
     if (fab) fab.style.display = isEditor() ? 'flex' : 'none';
   } else if (view === 'suggestions') {
     suggView.style.display = '';
@@ -1549,6 +1587,30 @@ function setView(view, btn) {
   } else if (view === 'budget') {
     budgetView.style.display = '';
     renderBudget();
+  }
+}
+
+function renderSectionsNav() {
+  const nav = document.getElementById('sections-nav');
+  if (!nav) return;
+  nav.innerHTML = db.map(sec => `
+    <button class="sec-chip" onclick="scrollToSection('${sec.id}')">
+      <span>${sec.emoji}</span><span>${sec.name}</span>
+    </button>`).join('');
+}
+
+function scrollToSection(id) {
+  // Ouvrir la section si repliée
+  const secEl = document.getElementById('sec-' + id);
+  if (secEl && !secEl.classList.contains('open')) secEl.classList.add('open');
+  secEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Highlight temporaire de la chip
+  document.querySelectorAll('.sec-chip').forEach(c => c.classList.remove('active'));
+  const chips = document.querySelectorAll('.sec-chip');
+  const idx = db.findIndex(s => s.id === id);
+  if (chips[idx]) {
+    chips[idx].classList.add('active');
+    setTimeout(() => chips[idx].classList.remove('active'), 1500);
   }
 }
 
