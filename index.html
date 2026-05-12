@@ -1093,12 +1093,18 @@ function renderItem(it, secId) {
       onchange="quickSave('${secId}','${it.id}','duree',this.value)" onclick="event.stopPropagation()">`);
   
   const fAdresse = fieldRowHtml('📍', 'Adresse', !it.adresse,
-    `<input class="field-input" id="adr-${it.id}" value="${it.adresse||''}" placeholder="Adresse complète…"
-      onchange="quickSave('${secId}','${it.id}','adresse',this.value)" onclick="event.stopPropagation()">`);
+    `<div style="display:flex;align-items:center;gap:6px;flex:1">
+      <input class="field-input" id="adr-${it.id}" value="${it.adresse||''}" placeholder="Adresse complète…" style="flex:1"
+        onchange="quickSave('${secId}','${it.id}','adresse',this.value)" onclick="event.stopPropagation()">
+      ${it.adresse ? `<a href="https://maps.google.com/?q=${encodeURIComponent(it.adresse)}" target="_blank" onclick="event.stopPropagation()" style="font-size:18px;text-decoration:none;flex-shrink:0">🗺️</a>` : ''}
+    </div>`);
   
   const fLien = fieldRowHtml('🔗', 'Lien', !it.lien,
-    `<input class="field-input" id="lnk-${it.id}" value="${it.lien||''}" placeholder="https://…"
-      onchange="quickSave('${secId}','${it.id}','lien',this.value)" onclick="event.stopPropagation()">`);
+    `<div style="display:flex;align-items:center;gap:6px;flex:1">
+      <input class="field-input" id="lnk-${it.id}" value="${it.lien||''}" placeholder="https://…" style="flex:1"
+        onchange="quickSave('${secId}','${it.id}','lien',this.value)" onclick="event.stopPropagation()">
+      ${it.lien ? `<a href="${it.lien}" target="_blank" onclick="event.stopPropagation()" style="font-size:18px;text-decoration:none;flex-shrink:0">↗️</a>` : ''}
+    </div>`);
 
   return `
   <div class="item" id="item-${it.id}">
