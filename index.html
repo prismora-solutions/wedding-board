@@ -572,7 +572,7 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   </div>
 </div>
 
-<button class="fab" onclick="openAddModal()">+</button>
+<button class="fab" id="fab-btn" onclick="openAddModal()">+</button>
 
 <div class="add-overlay" id="add-overlay" onclick="if(event.target===this)closeAddModal()">
   <div class="add-modal">
@@ -740,8 +740,14 @@ function showUserBadge() {
   badge.style.display = 'inline-flex';
   document.getElementById('header-user-emoji').textContent = currentUserEmoji;
   document.getElementById('header-user-name').textContent  = currentUser;
+  const fab = document.getElementById('fab-btn');
+  if (fab) fab.style.display = isEditor() ? 'flex' : 'none';
 }
 const UGC_PIP = { red:'pip-red', orange:'pip-orange', yellow:'pip-yellow', none:'pip-none' };
+
+function isEditor() {
+  return currentUser === 'Milkhit' || currentUser === 'JPVT';
+}
 
 // ── STORAGE ──
 function save() { localStorage.setItem('mariage_be_v3', JSON.stringify(db)); }
@@ -864,7 +870,7 @@ function renderComments(it, secId) {
       <div class="comments-list" id="comments-list-${it.id}">${commentsHtml}</div>
     </div>` : ''}
     <div class="item-action-bar">
-      <button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>
+      ${isEditor() ? `<button class="btn-expand-fields" onclick="toggleEmptyFields('${it.id}',this)">+ Ajouter des champs</button>` : ''}
       <button class="${btnClass}" id="btn-comment-${it.id}" onclick="toggleCommentInput('${it.id}')">${btnLabel}</button>
     </div>
     <div class="comment-input-row" id="comment-input-${it.id}">
@@ -905,14 +911,16 @@ function renderItem(it, secId) {
     <div class="item-top">
       <div class="urgency-pip ${UGC_PIP[it.urgence]||'pip-none'}"></div>
       <span class="item-label ${done?'done-label':''}">${it.label}</span>
-      <select class="status-sel" onchange="changeStatut('${secId}','${it.id}',this.value)">
+      <select class="status-sel" ${isEditor()?`onchange="changeStatut('${secId}','${it.id}',this.value)"`:'disabled style="opacity:0.6;cursor:default"'}>
         <option value="todo"       ${it.statut==='todo'?'selected':''}>⬜</option>
         <option value="inprogress" ${it.statut==='inprogress'?'selected':''}>⏳</option>
         <option value="done"       ${it.statut==='done'?'selected':''}>✅</option>
       </select>
       <div class="item-actions">
+        ${isEditor() ? `
         <button class="btn-action" onclick="deleteItem('${secId}','${it.id}')" title="Supprimer">🗑️</button>
         <button class="btn-action" onclick="editItem('${secId}','${it.id}')" title="Modifier">✏️</button>
+        ` : ''}
       </div>
     </div>
     <div class="item-body">
