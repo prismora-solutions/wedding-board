@@ -1084,6 +1084,22 @@ function renderItem(it, secId) {
       onchange="quickSave('${secId}','${it.id}','commentaire',this.value)"
       onclick="event.stopPropagation()">${it.commentaire||''}</textarea>`);
 
+  const fHeure = fieldRowHtml('🕐', 'Heure', !it.heure_debut,
+    `<input type="time" class="field-input" id="hre-${it.id}" value="${it.heure_debut||''}"
+      onchange="quickSave('${secId}','${it.id}','heure_debut',this.value)" onclick="event.stopPropagation()">`);
+
+  const fDuree = fieldRowHtml('⏱️', 'Durée (min)', !it.duree,
+    `<input type="number" class="field-input" id="dur-${it.id}" value="${it.duree||''}" placeholder="ex: 90"
+      onchange="quickSave('${secId}','${it.id}','duree',this.value)" onclick="event.stopPropagation()">`);
+  
+  const fAdresse = fieldRowHtml('📍', 'Adresse', !it.adresse,
+    `<input class="field-input" id="adr-${it.id}" value="${it.adresse||''}" placeholder="Adresse complète…"
+      onchange="quickSave('${secId}','${it.id}','adresse',this.value)" onclick="event.stopPropagation()">`);
+  
+  const fLien = fieldRowHtml('🔗', 'Lien', !it.lien,
+    `<input class="field-input" id="lnk-${it.id}" value="${it.lien||''}" placeholder="https://…"
+      onchange="quickSave('${secId}','${it.id}','lien',this.value)" onclick="event.stopPropagation()">`);
+
   return `
   <div class="item" id="item-${it.id}">
     <div class="item-top">
@@ -1103,7 +1119,7 @@ function renderItem(it, secId) {
     </div>
     <div class="item-body">
       <div class="item-fields">
-        ${fValeur}${fContact}${fBudget}${fDate}${fNote}
+        ${fValeur}${fContact}${fBudget}${fDate}${fHeure}${fDuree}${fAdresse}${fLien}${fNote}
       </div>
       ${renderComments(it, secId)}
     </div>
