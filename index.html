@@ -185,6 +185,13 @@ body {
   .field-input.note-input { max-width: 100%; }
 }
 
+@media (min-width: 768px) {
+  .item-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; }
+  .field-group-3 { display: contents; }
+  .field-group-2 { grid-column: span 2; }
+  .field-full { grid-column: span 3; }
+}
+
 /* Indicateur champs remplis sur la ligne fermée */
 .item-preview {
   flex: 1;
@@ -1133,7 +1140,11 @@ function renderItem(it, secId) {
     </div>
     <div class="item-body">
       <div class="item-fields">
-        ${fValeur}${fContact}${fBudget}${fDate}${fHeure}${fDuree}${fAdresse}${fLien}${fNote}
+        <div class="field-group-3">${fValeur}${fBudget}${fContact}</div>
+        <div class="field-group-3">${fDate}${fHeure}${fDuree}</div>
+        <div class="field-group-2">${fAdresse}</div>
+        <div class="field-group-2">${fLien}</div>
+        <div class="field-group-2">${fNote}</div>
       </div>
       ${renderComments(it, secId)}
     </div>
