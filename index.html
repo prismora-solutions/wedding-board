@@ -1005,7 +1005,8 @@ function selectUser(name, emoji) {
   document.getElementById('who-overlay').classList.remove('show');
   showUserBadge();
   render();
-  renderSuggestions();
+  if (currentView === 'suggestions') renderSuggestions();
+  if (currentView === 'budget')      renderBudget();
 }
 
 function showOtherInput() {
