@@ -718,6 +718,7 @@ function selectUser(name, emoji) {
   localStorage.setItem('mariage_user_emoji', emoji);
   document.getElementById('who-overlay').classList.remove('show');
   showUserBadge();
+  render();
 }
 
 function showOtherInput() {
