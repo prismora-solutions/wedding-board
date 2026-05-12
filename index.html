@@ -324,6 +324,9 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 }
 .header-user:hover { background: rgba(255,255,255,0.18); }
 
+.comment-edit-row { display:flex; flex-direction:column; gap:4px; }
+.comment-edit-row.hidden { display:none !important; }
+
 .hidden { display: none !important; }
 
 /* ── ITEM BODY ── */
@@ -837,11 +840,22 @@ function renderComments(it, secId) {
   const btnLabel = count > 0 ? `💬 ${count}` : `💬 Commenter`;
   const btnClass = count > 0 ? 'btn-comment has-comments' : 'btn-comment';
 
-  const commentsHtml = comments.map(c => `
-    <div class="comment-bubble">
-      <div class="comment-author">${c.user} <span class="comment-date">${c.date||''}</span></div>
-      ${c.text}
-    </div>`).join('');
+  const commentsHtml = comments.map((c, idx) => `
+      <div class="comment-bubble" id="cbubble-${it.id}-${idx}">
+        <div class="comment-author">
+          ${c.user} <span class="comment-date">${c.date||''}</span>
+          ${c.user === currentUser ? `
+            <span style="float:right;display:flex;gap:6px">
+              <button onclick="editComment('${secId}','${it.id}',${idx})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-soft);opacity:0.6">✏️</button>
+              <button onclick="deleteComment('${secId}','${it.id}',${idx})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--red);opacity:0.6">🗑️</button>
+            </span>` : ''}
+        </div>
+        <div id="ctext-${it.id}-${idx}">${c.text}</div>
+        <div class="comment-edit-row hidden" id="cedit-${it.id}-${idx}">
+          <input class="comment-input" id="cedit-input-${it.id}-${idx}" value="${c.text}" style="margin-top:6px">
+          <button class="btn-comment-send" onclick="saveEditComment('${secId}','${it.id}',${idx})" style="margin-top:4px">OK</button>
+        </div>
+      </div>`).join('');
 
   return `
     ${count > 0 ? `
@@ -1104,6 +1118,31 @@ function confirmAddItem() {
   }
   save(); pushToSheets(); render();
   closeAddModal();
+}
+
+function deleteComment(secId, itemId, idx) {
+  if (!confirm('Supprimer ce commentaire ?')) return;
+  const it = findItem(secId, itemId);
+  it.comments.splice(idx, 1);
+  save(); pushToSheets(); render();
+}
+
+function editComment(secId, itemId, idx) {
+  const editRow = document.getElementById(`cedit-${itemId}-${idx}`);
+  const textDiv = document.getElementById(`ctext-${itemId}-${idx}`);
+  editRow.classList.remove('hidden');
+  textDiv.style.display = 'none';
+  document.getElementById(`cedit-input-${itemId}-${idx}`).focus();
+}
+
+function saveEditComment(secId, itemId, idx) {
+  const input = document.getElementById(`cedit-input-${itemId}-${idx}`);
+  const val = input.value.trim();
+  if (!val) return;
+  const it = findItem(secId, itemId);
+  it.comments[idx].text = val;
+  it.comments[idx].date += ' (modifié)';
+  save(); pushToSheets(); render();
 }
 
 // ── INIT ──
