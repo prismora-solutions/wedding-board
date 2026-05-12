@@ -855,7 +855,7 @@ const USERS = {
 let currentUser = localStorage.getItem('mariage_user') || '';
 let currentUserEmoji = localStorage.getItem('mariage_user_emoji') || '👤';
 
-function initUser() {
+function User() {
   if (!currentUser) {
     document.getElementById('who-overlay').classList.add('show');
   } else {
@@ -1501,6 +1501,19 @@ document.addEventListener('input', e => {
   if (e.target.classList.contains('note-input')) {
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
+  }
+});
+// ── PULL TO REFRESH ──
+let ptStartY = 0;
+let ptPulling = false;
+document.addEventListener('touchstart', e => { ptStartY = e.touches[0].clientY; }, { passive: true });
+document.addEventListener('touchmove', e => {
+  if (window.scrollY === 0 && e.touches[0].clientY - ptStartY > 60) ptPulling = true;
+}, { passive: true });
+document.addEventListener('touchend', () => {
+  if (ptPulling) {
+    ptPulling = false;
+    pullFromSheets().then(() => { render(); renderSuggestions(); });
   }
 });
 </script>
