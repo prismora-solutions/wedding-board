@@ -901,10 +901,8 @@ async function pushToSheets(payload) {
   if (!SHEETS_URL) return;
   setSyncMsg('⟳ Synchronisation…', 'syncing');
   try {
-    const body = payload || { sections: db };
-    // Sécurité : ne jamais écraser avec des données vides
-    if (body.sections !== undefined && body.sections.length === 0) return;
-    if (!body.sections && !body.suggestion && !body.deleteSuggestion && !body.editSuggestion) return;
+    const body = db;
+    if (!Array.isArray(body) || body.length === 0) return;
     await fetch(SHEETS_URL, {
       method: 'POST',
       body: JSON.stringify(body),
@@ -920,14 +918,9 @@ async function pullFromSheets() {
     setSyncMsg('⟳ Chargement…', 'syncing');
     const r = await fetch(SHEETS_URL + '?t=' + Date.now());
     const d = await r.json();
-    if (d && d.sections && d.sections.length) {
-      db = d.sections;
-      suggestions = d.suggestions || [];
-      save();
-      setSyncMsg('✓ À jour', 'ok');
-    } else if (d && d.length) {
-      // ancien format
+    if (d && d.length) {
       db = d;
+      save();
       setSyncMsg('✓ À jour', 'ok');
     } else {
       setSyncMsg('Aucune donnée');
