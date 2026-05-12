@@ -936,7 +936,8 @@ function render() {
   const wrap = document.getElementById('sections');
   wrap.innerHTML = '';
   db.forEach(sec => {
-    const visible = filteredItems(sec.items);
+    const urgenceOrder = { red: 0, orange: 1, yellow: 2, none: 3, '': 3 };
+    const visible = filteredItems(sec.items).sort((a, b) => (urgenceOrder[a.urgence] ?? 3) - (urgenceOrder[b.urgence] ?? 3));
     if (filter !== 'all' && visible.length === 0) return;
     const div = document.createElement('div');
     div.className = 'sec open';
