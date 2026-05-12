@@ -854,7 +854,7 @@ function fieldRowHtml(icon, label, empty, inputHtml) {
 function renderComments(it, secId) {
   const comments = it.comments || [];
   const count = comments.length;
-  const btnLabel = count > 0 ? `💬 ${count}` : `💬 Commenter`;
+  const btnLabel = count > 0 ? `💬 Commenter (${count})` : `💬 Commenter`;
   const btnClass = count > 0 ? 'btn-comment has-comments' : 'btn-comment';
 
   const commentsHtml = comments.map((c, idx) => `
