@@ -833,6 +833,16 @@ function typeLabel(type) {
 
 function fieldRowHtml(icon, label, empty, inputHtml) {
   const emptyClass = empty ? 'field-row-empty field-row-hidden' : '';
+  if (!isEditor()) {
+    // Non-éditeur : affichage texte uniquement, pas d'input
+    if (empty) return ''; // champ vide → invisible
+    const val = inputHtml.match(/value="([^"]*)"/)?.[1] || inputHtml.match(/>(.*?)<\/textarea>/s)?.[1] || '';
+    return `<div class="field-row ${emptyClass}">
+      <span class="field-icon">${icon}</span>
+      <span class="field-label-txt">${label}</span>
+      <span style="font-size:12px;color:var(--text);padding:5px 0;flex:1">${val}</span>
+    </div>`;
+  }
   return `<div class="field-row ${emptyClass}">
     <span class="field-icon">${icon}</span>
     <span class="field-label-txt">${label}</span>
