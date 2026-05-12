@@ -1445,9 +1445,13 @@ async function pullSuggestions() {
 
 async function pushSuggestion(action, data) {
   try {
-    const params = '?action=' + action + '&data=' + encodeURIComponent(JSON.stringify(data));
-    await fetch(SHEETS_URL + params);
-  } catch(e) { console.log('sugg push error', e); }
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({ action, data }),
+      headers: { 'Content-Type': 'text/plain' }
+    });
+  } catch(e) { console.log('sugg error', e); }
 }
 
 // ── INIT ──
