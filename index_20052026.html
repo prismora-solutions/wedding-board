@@ -567,107 +567,6 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .btn-retro-save { padding: 6px 14px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
 .btn-retro-del { padding: 6px 14px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
 .retro-empty-day { padding: 12px 16px; font-size: 12px; color: var(--text-soft); font-style: italic; text-align: center; }
-
-/* ── VUE AGENDA JOUR ── */
-.agenda-wrap { padding: 0 0 80px; }
-.agenda-topbar {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-}
-.btn-agenda-back {
-  display: flex; align-items: center; gap: 5px;
-  padding: 6px 12px; border-radius: 20px;
-  border: 1.5px solid var(--border); background: var(--warm);
-  font-family: 'Jost', sans-serif; font-size: 12px; color: var(--text-mid);
-  cursor: pointer; transition: all 0.15s; flex-shrink: 0;
-}
-.btn-agenda-back:hover { border-color: var(--terra); color: var(--terra); }
-.agenda-day-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; color: var(--brown); flex: 1;
-}
-.agenda-day-title.wedding { color: var(--terra); }
-.agenda-grid {
-  background: var(--warm);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-.agenda-row {
-  display: grid;
-  grid-template-columns: 52px 1fr;
-  min-height: 40px;
-  border-bottom: 1px solid var(--border-soft);
-  position: relative;
-}
-.agenda-row:last-child { border-bottom: none; }
-.agenda-row.has-event { background: var(--cream); }
-.agenda-row.half-hour .agenda-hour { opacity: 0; }
-.agenda-row.half-hour { min-height: 32px; border-bottom: 1px dashed var(--border-soft); }
-.agenda-hour {
-  display: flex; align-items: flex-start; justify-content: center;
-  padding: 10px 0 0;
-  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 600;
-  color: var(--text-soft); border-right: 2px solid var(--border-soft);
-  letter-spacing: 0.5px;
-}
-.agenda-slot { padding: 0; position: relative; }
-/* Carte événement */
-.agenda-event-card {
-  margin: 4px 6px;
-  background: var(--terra);
-  border-radius: 8px;
-  padding: 6px 10px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-  position: relative;
-}
-.agenda-event-card:hover { opacity: 0.88; }
-.agenda-event-card.native { background: var(--sage); }
-.agenda-event-card.allday { background: var(--brown); margin: 2px 6px; }
-.agenda-card-label {
-  font-size: 13px; font-weight: 600; color: white;
-  display: flex; align-items: center; gap: 5px;
-}
-.agenda-card-meta {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px;
-}
-.agenda-card-meta span { font-size: 11px; color: rgba(255,255,255,0.8); }
-/* Expand inline */
-.agenda-event-expand {
-  display: none;
-  margin: 0 6px 6px;
-  background: var(--parchment);
-  border-radius: 0 0 8px 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-top: none;
-}
-.agenda-event-expand.open { display: block; }
-.agenda-expand-note { font-size: 13px; color: var(--text-mid); margin: 0 0 8px; }
-.agenda-expand-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-@media (max-width: 480px) { .agenda-expand-fields { grid-template-columns: 1fr; } }
-.agenda-expand-field { display: flex; flex-direction: column; gap: 3px; }
-.agenda-expand-field.full { grid-column: 1/-1; }
-.agenda-expand-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); }
-.agenda-expand-input {
-  padding: 5px 8px; border: 1px solid var(--border); border-radius: 7px;
-  font-family: 'Jost', sans-serif; font-size: 12px; color: var(--text);
-  background: white; width: 100%; box-sizing: border-box;
-}
-.agenda-expand-input:focus { outline: none; border-color: var(--terra-soft); }
-.agenda-expand-actions { display: flex; gap: 6px; margin-top: 8px; justify-content: flex-end; }
-.btn-agenda-save { padding: 5px 12px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
-.btn-agenda-edit { padding: 5px 12px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
-/* Ligne "maintenant" */
-.agenda-now-line {
-  position: absolute; left: 52px; right: 0; height: 2px;
-  background: var(--terra); z-index: 3; pointer-events: none;
-}
-.agenda-now-dot {
-  position: absolute; left: 46px; width: 8px; height: 8px;
-  background: var(--terra); border-radius: 50%; top: -3px; z-index: 3;
-}
 .retro-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(50,30,20,0.5); z-index: 500; align-items: flex-end; justify-content: center; }
 .retro-modal-overlay.show { display: flex; }
 .retro-modal { background: var(--cream); border-radius: 20px 20px 0 0; padding: 24px 20px 32px; width: 100%; max-width: 860px; box-shadow: 0 -8px 40px rgba(50,30,20,0.2); max-height: 90vh; overflow-y: auto; }
@@ -2001,12 +1900,12 @@ function renderRetro(weekKey) {
     if (isWedding) headClass += ' wedding';
     else if (isToday) headClass += ' today';
 
-    html += `<div class="retro-day" id="retro-day-${dateStr}" onclick="renderAgendaDay('${dateStr}')" style="cursor:pointer">
+    html += `<div class="retro-day" id="retro-day-${dateStr}">
       <div class="${headClass}">
         <span class="retro-day-label">${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}</span>
         ${isWedding ? `<span class="retro-day-badge">💒 Mariage</span>` : ''}
         ${isToday && !isWedding ? `<span class="retro-day-badge" style="background:rgba(255,255,255,0.2);color:var(--cream)">Aujourd'hui</span>` : ''}
-        <span class="retro-day-date" style="font-size:10px;opacity:0.7">▶ voir le jour</span>
+        <span class="retro-day-date">${d.getFullYear()}</span>
       </div>
       <div class="retro-day-body">`;
 
@@ -2153,140 +2052,6 @@ function saveRetroModal() {
   save(); pushToSheets();
   closeRetroModal();
   renderRetro();
-}
-
-
-// ── VUE AGENDA JOUR ──
-let _agendaDate = null; // dateStr actif en vue jour
-
-function renderAgendaDay(dateStr) {
-  _agendaDate = dateStr;
-  const wrap = document.getElementById('view-retro');
-  if (!wrap) return;
-
-  const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-  const MOIS  = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const d = new Date(dateStr + 'T12:00:00');
-  const isWedding = dateStr === '2026-06-27';
-
-  const events = getRetroEvents().filter(ev => ev.date && ev.date.substring(0,10) === dateStr);
-  const allDay  = events.filter(ev => !ev.heure_debut);
-  const timed   = events.filter(ev => ev.heure_debut);
-
-  // Indexer les événements horodatés par heure de début (HH)
-  const byHour = {};
-  timed.forEach(ev => {
-    const hh = parseInt(ev.heure_debut.split(':')[0], 10);
-    const mm = parseInt(ev.heure_debut.split(':')[1] || '0', 10);
-    const key = hh + (mm >= 30 ? 0.5 : 0);
-    if (!byHour[key]) byHour[key] = [];
-    byHour[key].push(ev);
-  });
-
-  // Plage horaire : 08:00 → 23:00, pas 30 min
-  const START_H = 8, END_H = 23;
-  const slots = [];
-  for (let h = START_H; h <= END_H; h++) {
-    slots.push({ h, m: 0, key: h });
-    if (h < END_H) slots.push({ h, m: 30, key: h + 0.5 });
-  }
-
-  // Ligne "maintenant" (si aujourd'hui)
-  const now = new Date();
-  const todayStr = now.toISOString().substring(0,10);
-  const isToday  = dateStr === todayStr;
-  const nowKey   = isToday ? now.getHours() + (now.getMinutes() >= 30 ? 0.5 : 0) : null;
-
-  // Titre
-  const titleClass = isWedding ? 'agenda-day-title wedding' : 'agenda-day-title';
-  const titleStr = `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]} ${d.getFullYear()}`;
-
-  let html = `<div class="agenda-wrap">
-    <div class="agenda-topbar">
-      <button class="btn-agenda-back" onclick="renderRetro()">← Retour</button>
-      <span class="${titleClass}">${isWedding ? '💒 ' : ''}${titleStr}</span>
-      ${isEditor() ? `<button class="btn-retro-add" onclick="openRetroModal()">+ Événement</button>` : ''}
-    </div>`;
-
-  // Événements toute la journée
-  if (allDay.length) {
-    html += `<div style="margin-bottom:10px">`;
-    allDay.forEach(ev => { html += retroAlldayHtml(ev); });
-    html += `</div>`;
-  }
-
-  html += `<div class="agenda-grid" id="agenda-grid">`;
-
-  slots.forEach(slot => {
-    const isHalfHour = slot.m === 30;
-    const evts = byHour[slot.key] || [];
-    const hasEvt = evts.length > 0;
-    const isNowRow = nowKey !== null && slot.key === nowKey;
-
-    html += `<div class="agenda-row${isHalfHour ? ' half-hour' : ''}${hasEvt ? ' has-event' : ''}" id="agenda-slot-${slot.key}">`;
-
-    // Heure
-    const hStr = String(slot.h).padStart(2,'0') + ':' + String(slot.m).padStart(2,'0');
-    html += `<div class="agenda-hour">${hStr}</div>`;
-
-    // Slot
-    html += `<div class="agenda-slot">`;
-
-    if (isNowRow) {
-      html += `<div class="agenda-now-line"><div class="agenda-now-dot"></div></div>`;
-    }
-
-    evts.forEach(ev => {
-      const mapsUrl = ev.adresse ? `https://maps.google.com/?q=${encodeURIComponent(ev.adresse)}` : '';
-      const cardClass = ev._native ? 'agenda-event-card native' : 'agenda-event-card';
-      const dureeStr = ev.duree ? `⏱ ${ev.duree} min` : '';
-      html += `
-        <div class="${cardClass}" onclick="toggleAgendaExpand('${ev.id}')">
-          <div class="agenda-card-label">
-            <span>${ev._secEmoji}</span>
-            <span>${ev.label}</span>
-            ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${ev._secId}','${ev.id}')" style="margin-left:auto;font-size:12px;opacity:0.7">✏️</span>` : ''}
-          </div>
-          <div class="agenda-card-meta">
-            ${ev.heure_debut ? `<span>${ev.heure_debut}${ev.duree ? ' · '+ev.duree+' min' : ''}</span>` : ''}
-            ${ev.responsable ? `<span>👤 ${ev.responsable}</span>` : ''}
-            ${ev.adresse ? `<span><a href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="color:rgba(255,255,255,0.9)">📍 ${ev.adresse}</a></span>` : ''}
-          </div>
-        </div>
-        <div class="agenda-event-expand" id="agenda-exp-${ev.id}">
-          ${ev.commentaire ? `<p class="agenda-expand-note">${ev.commentaire}</p>` : ''}
-          <div class="agenda-expand-fields">
-            <div class="agenda-expand-field"><span class="agenda-expand-label">Section</span><span style="font-size:12px;color:var(--text-mid)">${ev._secEmoji} ${ev._secName}</span></div>
-            ${ev.lien ? `<div class="agenda-expand-field"><span class="agenda-expand-label">Lien</span><a href="${ev.lien}" target="_blank" style="font-size:12px;color:var(--terra)">${ev.lien}</a></div>` : ''}
-          </div>
-        </div>`;
-    });
-
-    html += `</div></div>`;
-  });
-
-  html += `</div></div>`;
-  wrap.innerHTML = html;
-
-  // Scroll vers premier événement ou maintenant
-  setTimeout(() => {
-    let target = null;
-    if (isToday && nowKey) target = document.getElementById('agenda-slot-' + nowKey);
-    if (!target && timed.length) {
-      const firstKey = Math.min(...timed.map(ev => {
-        const hh = parseInt(ev.heure_debut.split(':')[0],10);
-        const mm = parseInt(ev.heure_debut.split(':')[1]||'0',10);
-        return hh + (mm>=30?0.5:0);
-      }));
-      target = document.getElementById('agenda-slot-' + firstKey);
-    }
-    (target || document.getElementById('agenda-grid'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 80);
-}
-
-function toggleAgendaExpand(id) {
-  const el = document.getElementById('agenda-exp-' + id);
-  if (el) el.classList.toggle('open');
 }
 
 // ── BUDGET ──
