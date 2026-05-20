@@ -567,107 +567,6 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .btn-retro-save { padding: 6px 14px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
 .btn-retro-del { padding: 6px 14px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
 .retro-empty-day { padding: 12px 16px; font-size: 12px; color: var(--text-soft); font-style: italic; text-align: center; }
-
-/* ── VUE AGENDA JOUR ── */
-.agenda-wrap { padding: 0 0 80px; }
-.agenda-topbar {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
-}
-.btn-agenda-back {
-  display: flex; align-items: center; gap: 5px;
-  padding: 6px 12px; border-radius: 20px;
-  border: 1.5px solid var(--border); background: var(--warm);
-  font-family: 'Jost', sans-serif; font-size: 12px; color: var(--text-mid);
-  cursor: pointer; transition: all 0.15s; flex-shrink: 0;
-}
-.btn-agenda-back:hover { border-color: var(--terra); color: var(--terra); }
-.agenda-day-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; color: var(--brown); flex: 1;
-}
-.agenda-day-title.wedding { color: var(--terra); }
-.agenda-grid {
-  background: var(--warm);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-.agenda-row {
-  display: grid;
-  grid-template-columns: 52px 1fr;
-  min-height: 40px;
-  border-bottom: 1px solid var(--border-soft);
-  position: relative;
-}
-.agenda-row:last-child { border-bottom: none; }
-.agenda-row.has-event { background: var(--cream); }
-.agenda-row.half-hour .agenda-hour { opacity: 0; }
-.agenda-row.half-hour { min-height: 32px; border-bottom: 1px dashed var(--border-soft); }
-.agenda-hour {
-  display: flex; align-items: flex-start; justify-content: center;
-  padding: 10px 0 0;
-  font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 600;
-  color: var(--text-soft); border-right: 2px solid var(--border-soft);
-  letter-spacing: 0.5px;
-}
-.agenda-slot { padding: 0; position: relative; }
-/* Carte événement */
-.agenda-event-card {
-  margin: 4px 6px;
-  background: var(--terra);
-  border-radius: 8px;
-  padding: 6px 10px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-  position: relative;
-}
-.agenda-event-card:hover { opacity: 0.88; }
-.agenda-event-card.native { background: var(--sage); }
-.agenda-event-card.allday { background: var(--brown); margin: 2px 6px; }
-.agenda-card-label {
-  font-size: 13px; font-weight: 600; color: white;
-  display: flex; align-items: center; gap: 5px;
-}
-.agenda-card-meta {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px;
-}
-.agenda-card-meta span { font-size: 11px; color: rgba(255,255,255,0.8); }
-/* Expand inline */
-.agenda-event-expand {
-  display: none;
-  margin: 0 6px 6px;
-  background: var(--parchment);
-  border-radius: 0 0 8px 8px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-top: none;
-}
-.agenda-event-expand.open { display: block; }
-.agenda-expand-note { font-size: 13px; color: var(--text-mid); margin: 0 0 8px; }
-.agenda-expand-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-@media (max-width: 480px) { .agenda-expand-fields { grid-template-columns: 1fr; } }
-.agenda-expand-field { display: flex; flex-direction: column; gap: 3px; }
-.agenda-expand-field.full { grid-column: 1/-1; }
-.agenda-expand-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); }
-.agenda-expand-input {
-  padding: 5px 8px; border: 1px solid var(--border); border-radius: 7px;
-  font-family: 'Jost', sans-serif; font-size: 12px; color: var(--text);
-  background: white; width: 100%; box-sizing: border-box;
-}
-.agenda-expand-input:focus { outline: none; border-color: var(--terra-soft); }
-.agenda-expand-actions { display: flex; gap: 6px; margin-top: 8px; justify-content: flex-end; }
-.btn-agenda-save { padding: 5px 12px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
-.btn-agenda-edit { padding: 5px 12px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 11px; cursor: pointer; }
-/* Ligne "maintenant" */
-.agenda-now-line {
-  position: absolute; left: 52px; right: 0; height: 2px;
-  background: var(--terra); z-index: 3; pointer-events: none;
-}
-.agenda-now-dot {
-  position: absolute; left: 46px; width: 8px; height: 8px;
-  background: var(--terra); border-radius: 50%; top: -3px; z-index: 3;
-}
 .retro-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(50,30,20,0.5); z-index: 500; align-items: flex-end; justify-content: center; }
 .retro-modal-overlay.show { display: flex; }
 .retro-modal { background: var(--cream); border-radius: 20px 20px 0 0; padding: 24px 20px 32px; width: 100%; max-width: 860px; box-shadow: 0 -8px 40px rgba(50,30,20,0.2); max-height: 90vh; overflow-y: auto; }
@@ -857,6 +756,33 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
   overflow-y: auto;
   box-shadow: 0 -4px 30px rgba(92,61,46,0.15);
 }
+
+
+/* ── FABs navigation agenda jour ── */
+.fab-agenda-wrap {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 200;
+}
+.fab-agenda-nav {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--brown);
+  color: var(--cream);
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(92,61,46,0.35);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.fab-agenda-nav:hover { background: var(--terra); }
+.agenda-day-title.today { color: var(--sage); }
+.agenda-hour.half { opacity: 0; }
 
 /* ── VUE BUDGET ── */
 .budget-kpis { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -1810,6 +1736,7 @@ function setView(view, btn) {
   budgetView.style.display = 'none';
   if (sectionsNav) sectionsNav.style.display = 'none';
   if (fab) fab.style.display = 'none';
+  if (view !== 'retro') hideAgendaFabs();
   if (view === 'board') {
     filterBar.style.display = '';
     boardView.style.display = '';
@@ -1886,195 +1813,295 @@ function getRetroSection() {
 }
 
 function getRetroEvents() {
-  // Événements issus du Board (toutes sections sauf __retro__) avec date remplie
   const boardEvts = db
     .filter(s => s.id !== RETRO_SEC_ID)
     .flatMap(s => s.items
       .filter(it => it.date)
       .map(it => ({ ...it, _secName: s.name, _secEmoji: s.emoji, _secId: s.id, _native: false }))
     );
-  // Événements natifs rétro
   const retroEvts = getRetroSection().items
     .filter(it => it.date)
     .map(it => ({ ...it, _secName: 'Rétro', _secEmoji: '🗓️', _secId: RETRO_SEC_ID, _native: true }));
   return [...boardEvts, ...retroEvts];
 }
 
-let _retroWeek = 'all'; // 'all' | 'YYYY-Wnn'
+// Fenêtre globale
+const RETRO_START = '2026-06-01';
+const RETRO_END   = '2026-07-04';
+
+function getRetroDays() {
+  // Tous les jours de la fenêtre
+  const days = [];
+  const cur = new Date(RETRO_START + 'T12:00:00');
+  const end = new Date(RETRO_END   + 'T12:00:00');
+  while (cur <= end) { days.push(cur.toISOString().substring(0,10)); cur.setDate(cur.getDate()+1); }
+  return days;
+}
 
 function getRetroWeeks() {
-  // Génère les semaines de la fenêtre juin → 4 juillet
-  const weeks = [];
-  const seen = new Set();
-  const cur = new Date('2026-06-01');
-  const end = new Date('2026-07-04');
+  const weeks = [], seen = new Set();
+  const cur = new Date(RETRO_START + 'T12:00:00');
+  const end = new Date(RETRO_END   + 'T12:00:00');
   while (cur <= end) {
     const mon = new Date(cur);
-    mon.setDate(cur.getDate() - ((cur.getDay() + 6) % 7)); // lundi
+    mon.setDate(cur.getDate() - ((cur.getDay()+6)%7));
     const key = mon.toISOString().substring(0,10);
     if (!seen.has(key)) {
       seen.add(key);
-      const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
-      const isWeddingWeek = mon <= new Date('2026-06-27') && sun >= new Date('2026-06-27');
-      weeks.push({ key, mon, sun, isWeddingWeek });
+      const sun = new Date(mon); sun.setDate(mon.getDate()+6);
+      weeks.push({ key, mon, sun, isWeddingWeek: mon <= new Date('2026-06-27') && sun >= new Date('2026-06-27') });
     }
-    cur.setDate(cur.getDate() + 1);
+    cur.setDate(cur.getDate()+1);
   }
   return weeks;
 }
 
 function retroWeekLabel(w) {
-  const MOIS = ['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
-  return `${w.mon.getDate()} ${MOIS[w.mon.getMonth()]} → ${w.sun.getDate()} ${MOIS[w.sun.getMonth()]}`;
+  const M = ['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
+  return `${w.mon.getDate()} ${M[w.mon.getMonth()]} → ${w.sun.getDate()} ${M[w.sun.getMonth()]}`;
 }
 
+// ── ÉTAT ──
+let _agendaDate = null; // dateStr affiché en vue agenda jour
+
+// ── ENTRY POINT ──
 function renderRetro(weekKey) {
-  if (weekKey !== undefined) _retroWeek = weekKey;
+  // Choisir le jour à afficher
+  const allDays  = getRetroDays();
+  const today    = new Date(); today.setHours(0,0,0,0);
+  const todayStr = today.toISOString().substring(0,10);
+
+  let targetDate = _agendaDate;
+
+  if (weekKey !== undefined) {
+    // Clic sur chip semaine → premier jour de la semaine dans la fenêtre
+    if (weekKey === 'all') {
+      targetDate = allDays.includes(todayStr) ? todayStr : '2026-06-27';
+    } else {
+      const mon = new Date(weekKey + 'T12:00:00');
+      const candidates = [];
+      for (let i=0; i<7; i++) {
+        const d = new Date(mon); d.setDate(mon.getDate()+i);
+        const s = d.toISOString().substring(0,10);
+        if (allDays.includes(s)) candidates.push(s);
+      }
+      targetDate = candidates[0] || '2026-06-27';
+    }
+  }
+
+  if (!targetDate) {
+    targetDate = allDays.includes(todayStr) ? todayStr : '2026-06-27';
+  }
+
+  renderAgendaDay(targetDate);
+}
+
+// ── VUE AGENDA JOUR ──
+function renderAgendaDay(dateStr) {
+  _agendaDate = dateStr;
   const wrap = document.getElementById('view-retro');
   if (!wrap) return;
 
-  // Fenêtre complète
-  const globalStart = new Date('2026-06-01');
-  const globalEnd   = new Date('2026-07-04');
-  const today = new Date(); today.setHours(0,0,0,0);
-
-  // Fenêtre filtrée selon semaine
-  let start, end;
-  if (_retroWeek === 'all') {
-    start = globalStart; end = globalEnd;
-  } else {
-    const mon = new Date(_retroWeek + 'T12:00:00');
-    const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
-    start = mon > globalStart ? mon : globalStart;
-    end   = sun < globalEnd   ? sun : globalEnd;
-  }
-
-  const events = getRetroEvents();
-  const byDay = {};
-  events.forEach(ev => {
-    const d = ev.date.substring(0, 10);
-    if (!byDay[d]) byDay[d] = [];
-    byDay[d].push(ev);
-  });
-
-  const days = [];
-  const cur = new Date(start);
-  while (cur <= end) {
-    days.push(cur.toISOString().substring(0, 10));
-    cur.setDate(cur.getDate() + 1);
-  }
-
   const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
   const MOIS  = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const weeks = getRetroWeeks();
+  const d = new Date(dateStr + 'T12:00:00');
+  const isWedding = dateStr === '2026-06-27';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const isToday = dateStr === today.toISOString().substring(0,10);
+
+  const allDays  = getRetroDays();
+  const idx      = allDays.indexOf(dateStr);
+  const prevDate = idx > 0             ? allDays[idx-1] : null;
+  const nextDate = idx < allDays.length-1 ? allDays[idx+1] : null;
+
+  const allEvents = getRetroEvents();
+  const events    = allEvents.filter(ev => ev.date && ev.date.substring(0,10) === dateStr);
+  const allDay    = events.filter(ev => !ev.heure_debut);
+  const timed     = events.filter(ev => ev.heure_debut).sort((a,b) => a.heure_debut.localeCompare(b.heure_debut));
+
+  // Plage horaire : 08:00→23:00, 1 slot = 30 min = SLOT_H px
+  const SLOT_H   = 36; // px par demi-heure
+  const START_H  = 8;
+  const END_H    = 23;
+  const TOTAL_SLOTS = (END_H - START_H) * 2; // 30 slots
+
+  // Construire la grille : tableau de TOTAL_SLOTS cellules
+  // Chaque événement occupe ceil(duree/30) slots, minimum 1
+  // Marquer les slots occupés pour éviter les chevauchements simples
+  const slotOccupied = new Array(TOTAL_SLOTS).fill(null); // null ou ref event
+
+  timed.forEach(ev => {
+    const [hh, mm] = ev.heure_debut.split(':').map(Number);
+    const startSlot = (hh - START_H) * 2 + (mm >= 30 ? 1 : 0);
+    const dureeMin  = parseInt(ev.duree) || 0;
+    const nbSlots   = dureeMin > 0 ? Math.ceil(dureeMin / 30) : 1;
+    ev._startSlot = startSlot;
+    ev._nbSlots   = nbSlots;
+    for (let s = startSlot; s < Math.min(startSlot + nbSlots, TOTAL_SLOTS); s++) {
+      slotOccupied[s] = ev.id;
+    }
+  });
 
   // Chips semaines
+  const weeks = getRetroWeeks();
+  const currentWeekKey = (() => {
+    const mon = new Date(d);
+    mon.setDate(d.getDate() - ((d.getDay()+6)%7));
+    return mon.toISOString().substring(0,10);
+  })();
+
   const weeksBar = `<div class="retro-week-bar">
-    <button class="retro-week-chip ${_retroWeek==='all'?'active':''}" onclick="renderRetro('all')">✦ Tout</button>
+    <button class="retro-week-chip" onclick="renderRetro('all')">✦ Tout</button>
     ${weeks.map(w => `
-      <button class="retro-week-chip ${w.isWeddingWeek?'chip-wedding':''} ${_retroWeek===w.key?'active':''}"
+      <button class="retro-week-chip ${w.isWeddingWeek?'chip-wedding':''} ${w.key===currentWeekKey?'active':''}"
         onclick="renderRetro('${w.key}')">
         ${w.isWeddingWeek ? '💒 ' : ''}${retroWeekLabel(w)}
       </button>`).join('')}
   </div>`;
 
-  let html = `<div class="retro-wrap">
-    <div class="retro-topbar">
-      <span class="retro-topbar-title">🗓️ Rétro-Planning</span>
-      ${isEditor() ? `<button class="btn-retro-add" onclick="openRetroModal()">+ Événement</button>` : ''}
-    </div>
-    ${weeksBar}`;
+  const titleClass = isWedding ? 'agenda-day-title wedding' : (isToday ? 'agenda-day-title today' : 'agenda-day-title');
+  const titleStr   = `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]} ${d.getFullYear()}`;
 
-  let hasAny = false;
-  days.forEach(dateStr => {
-    const d = new Date(dateStr + 'T12:00:00');
-    const isToday   = dateStr === today.toISOString().substring(0,10);
-    const isWedding = dateStr === '2026-06-27';
-    const evts = byDay[dateStr] || [];
-    const allDay = evts.filter(ev => !ev.heure_debut);
-    const timed  = evts.filter(ev => ev.heure_debut).sort((a,b) => a.heure_debut.localeCompare(b.heure_debut));
+  // Ligne "maintenant"
+  const now = new Date();
+  let nowTopPx = null;
+  if (isToday && now.getHours() >= START_H && now.getHours() < END_H) {
+    const elapsedMin = (now.getHours() - START_H) * 60 + now.getMinutes();
+    nowTopPx = Math.round((elapsedMin / 30) * SLOT_H);
+  }
 
-    if (!evts.length && !isToday && !isWedding) return;
-    hasAny = true;
+  // Construire les rangées
+  let gridRows = '';
+  let skipUntil = -1;
 
-    let headClass = 'retro-day-head';
-    if (isWedding) headClass += ' wedding';
-    else if (isToday) headClass += ' today';
+  for (let s = 0; s < TOTAL_SLOTS; s++) {
+    const h = START_H + Math.floor(s / 2);
+    const m = (s % 2) * 30;
+    const timeStr = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+    const isHalf  = m === 30;
 
-    html += `<div class="retro-day" id="retro-day-${dateStr}" onclick="renderAgendaDay('${dateStr}')" style="cursor:pointer">
-      <div class="${headClass}">
-        <span class="retro-day-label">${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}</span>
-        ${isWedding ? `<span class="retro-day-badge">💒 Mariage</span>` : ''}
-        ${isToday && !isWedding ? `<span class="retro-day-badge" style="background:rgba(255,255,255,0.2);color:var(--cream)">Aujourd'hui</span>` : ''}
-        <span class="retro-day-date" style="font-size:10px;opacity:0.7">▶ voir le jour</span>
-      </div>
-      <div class="retro-day-body">`;
+    // Trouver événement démarrant sur ce slot
+    const evHere = timed.find(ev => ev._startSlot === s);
 
-    if (!evts.length) {
-      html += `<div class="retro-empty-day">Aucun événement</div>`;
-    } else {
-      allDay.forEach(ev => { html += retroAlldayHtml(ev); });
-      timed.forEach(ev =>  { html += retroEventHtml(ev); });
+    if (s < skipUntil) {
+      // Slot absorbé par un événement multi-slots → ne rien afficher
+      continue;
     }
-    html += `</div></div>`;
-  });
 
-  if (!hasAny) html += `<div style="text-align:center;padding:40px;color:var(--text-soft);font-size:13px;font-style:italic">Aucun événement cette semaine.</div>`;
+    if (evHere) {
+      const nb      = evHere._nbSlots;
+      const height  = nb * SLOT_H;
+      skipUntil     = s + nb;
+      const mapsUrl = evHere.adresse ? `https://maps.google.com/?q=${encodeURIComponent(evHere.adresse)}` : '';
+      const cardClass = evHere._native ? 'agenda-event-card native' : 'agenda-event-card';
 
-  html += `</div>`;
+      gridRows += `
+        <div class="agenda-row has-event" style="min-height:${height}px" id="agenda-slot-${s}">
+          <div class="agenda-hour${isHalf?' half':''}"><span>${timeStr}</span></div>
+          <div class="agenda-slot">
+            <div class="${cardClass}" style="min-height:${height-10}px" onclick="toggleAgendaExpand('${evHere.id}')">
+              <div class="agenda-card-label">
+                <span>${evHere._secEmoji}</span>
+                <span>${evHere.label}</span>
+                ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${evHere._secId}','${evHere.id}')" style="margin-left:auto;font-size:12px;opacity:0.75">✏️</span>` : ''}
+              </div>
+              <div class="agenda-card-meta">
+                <span>${evHere.heure_debut}${evHere.duree ? ' · '+evHere.duree+' min' : ''}</span>
+                ${evHere.responsable ? `<span>👤 ${evHere.responsable}</span>` : ''}
+                ${evHere.adresse ? `<span><a href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="color:rgba(255,255,255,0.85)">📍 ${evHere.adresse}</a></span>` : ''}
+              </div>
+            </div>
+            <div class="agenda-event-expand" id="agenda-exp-${evHere.id}">
+              ${evHere.commentaire ? `<p class="agenda-expand-note">${evHere.commentaire}</p>` : ''}
+              <div style="font-size:11px;color:var(--text-soft)">Section : ${evHere._secEmoji} ${evHere._secName}</div>
+              ${evHere.lien ? `<div style="margin-top:4px"><a href="${evHere.lien}" target="_blank" style="font-size:12px;color:var(--terra)">${evHere.lien}</a></div>` : ''}
+            </div>
+          </div>
+        </div>`;
+    } else {
+      // Slot vide
+      gridRows += `
+        <div class="agenda-row${isHalf?' half-hour':''}" style="min-height:${SLOT_H}px" id="agenda-slot-${s}">
+          <div class="agenda-hour${isHalf?' half':''}"><span>${timeStr}</span></div>
+          <div class="agenda-slot"></div>
+        </div>`;
+    }
+  }
+
+  let html = `<div class="agenda-wrap">
+    ${weeksBar}
+    <div class="agenda-topbar">
+      <span class="${titleClass}">${isWedding ? '💒 ' : isToday ? '📍 ' : ''}${titleStr}</span>
+      ${isEditor() ? `<button class="btn-retro-add" onclick="openRetroModal()">+ Événement</button>` : ''}
+    </div>`;
+
+  // Événements toute la journée
+  if (allDay.length) {
+    html += `<div style="margin-bottom:8px">`;
+    allDay.forEach(ev => {
+      const mapsUrl = ev.adresse ? `https://maps.google.com/?q=${encodeURIComponent(ev.adresse)}` : '';
+      html += `<div class="retro-allday">
+        <span>${ev._secEmoji}</span>
+        <span class="retro-allday-label">${ev.label}</span>
+        ${ev.responsable ? `<span class="retro-meta-item">👤 ${ev.responsable}</span>` : ''}
+        ${ev.adresse ? `<span class="retro-meta-item">📍 <a href="${mapsUrl}" target="_blank">${ev.adresse}</a></span>` : ''}
+        ${isEditor() ? `<span onclick="openRetroEdit('${ev._secId}','${ev.id}')" style="font-size:11px;opacity:0.5;cursor:pointer">✏️</span>` : ''}
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `<div class="agenda-grid" id="agenda-grid" style="position:relative">`;
+
+  // Ligne maintenant
+  if (nowTopPx !== null) {
+    html += `<div style="position:absolute;left:52px;right:0;top:${nowTopPx}px;height:2px;background:var(--terra);z-index:3;pointer-events:none">
+      <div style="position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--terra)"></div>
+    </div>`;
+  }
+
+  html += gridRows + `</div></div>`;
+
+  // Flèches flottantes
+  const fabPrev = prevDate ? `<button class="fab-agenda-nav" id="fab-prev" onclick="renderAgendaDay('${prevDate}')" title="Jour précédent">◀</button>` : `<button class="fab-agenda-nav" style="opacity:0.25;cursor:default">◀</button>`;
+  const fabNext = nextDate ? `<button class="fab-agenda-nav" id="fab-next" onclick="renderAgendaDay('${nextDate}')" title="Jour suivant">▶</button>` : `<button class="fab-agenda-nav" style="opacity:0.25;cursor:default">▶</button>`;
+
   wrap.innerHTML = html;
 
-  // Scroll : si vue complète → aujourd'hui ; si semaine → haut
+  // Injecter les FABs nav dans le body (hors wrap pour position fixe)
+  let fabWrap = document.getElementById('fab-agenda-wrap');
+  if (!fabWrap) {
+    fabWrap = document.createElement('div');
+    fabWrap.id = 'fab-agenda-wrap';
+    fabWrap.className = 'fab-agenda-wrap';
+    document.body.appendChild(fabWrap);
+  }
+  fabWrap.innerHTML = fabPrev + fabNext;
+  fabWrap.style.display = 'flex';
+
+  // Scroll vers premier événement ou maintenant
   setTimeout(() => {
-    if (_retroWeek === 'all') {
-      const todayEl = document.getElementById('retro-day-' + today.toISOString().substring(0,10));
-      const first   = wrap.querySelector('[id^="retro-day-"]');
-      (todayEl || first)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    let target = null;
+    if (nowTopPx !== null) {
+      const grid = document.getElementById('agenda-grid');
+      if (grid) { grid.scrollIntoView({ behavior:'smooth', block:'start' }); return; }
     }
-  }, 100);
+    if (timed.length) {
+      target = document.getElementById('agenda-slot-' + timed[0]._startSlot);
+    }
+    (target || document.getElementById('agenda-grid'))?.scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 80);
 }
 
-function retroAlldayHtml(ev) {
-  const id = ev.id;
-  return `<div class="retro-allday" onclick="toggleRetroEvent('allday-${id}')">
-    <span>${ev._secEmoji}</span>
-    <span class="retro-allday-label">${ev.label}</span>
-    ${ev.responsable ? `<span class="retro-meta-item">👤 ${ev.responsable}</span>` : ''}
-    ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${ev._secId}','${id}')" style="font-size:11px;opacity:0.5;margin-left:6px">✏️</span>` : ''}
-  </div>`;
-}
-
-function retroEventHtml(ev) {
-  const id = ev.id;
-  const dureeStr = ev.duree ? `${ev.duree} min` : '';
-  const mapsUrl  = ev.adresse ? `https://maps.google.com/?q=${encodeURIComponent(ev.adresse)}` : '';
-  return `<div class="retro-event" id="retro-ev-${id}">
-    <div class="retro-event-time">${ev.heure_debut}</div>
-    <div class="retro-event-body" onclick="toggleRetroEvent('ev-${id}')">
-      <div class="retro-event-label">
-        <span>${ev._secEmoji}</span>
-        <span>${ev.label}</span>
-        ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${ev._secId}','${id}')" style="font-size:11px;opacity:0.5;margin-left:auto">✏️</span>` : ''}
-      </div>
-      <div class="retro-event-meta">
-        ${dureeStr ? `<span class="retro-meta-item">⏱ ${dureeStr}</span>` : ''}
-        ${ev.responsable ? `<span class="retro-meta-item">👤 ${ev.responsable}</span>` : ''}
-        ${ev.adresse ? `<span class="retro-meta-item">📍 <a href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()">${ev.adresse}</a></span>` : ''}
-      </div>
-    </div>
-    <div class="retro-event-details" id="retro-detail-${id}">
-      ${ev.commentaire ? `<p style="font-size:13px;color:var(--text-mid);margin:0 0 6px">${ev.commentaire}</p>` : '<p style="font-size:12px;color:var(--text-soft);font-style:italic;margin:0">Aucune note.</p>'}
-    </div>
-  </div>`;
-}
-
-function toggleRetroEvent(uid) {
-  const el = document.getElementById('retro-ev-' + uid.replace('ev-','').replace('allday-',''));
+function toggleAgendaExpand(id) {
+  const el = document.getElementById('agenda-exp-' + id);
   if (el) el.classList.toggle('open');
-  const det = document.getElementById('retro-detail-' + uid.replace('ev-','').replace('allday-',''));
-  if (det) det.style.display = det.style.display === 'block' ? 'none' : 'block';
+}
+
+// Masquer les FABs agenda quand on quitte la vue retro
+function hideAgendaFabs() {
+  const f = document.getElementById('fab-agenda-wrap');
+  if (f) f.style.display = 'none';
 }
 
 // ── Modal retro ──
@@ -2088,6 +2115,11 @@ function openRetroModal() {
     const el = document.getElementById('rm-' + f);
     if (el) el.value = '';
   });
+  // Pré-remplir la date avec le jour affiché
+  if (_agendaDate) {
+    const el = document.getElementById('rm-date');
+    if (el) el.value = _agendaDate;
+  }
   document.getElementById('retro-modal-overlay').classList.add('show');
 }
 
@@ -2097,7 +2129,7 @@ function openRetroEdit(secId, itemId) {
   if (!item) return;
   _retroEditSecId  = secId;
   _retroEditItemId = itemId;
-  document.getElementById('retro-modal-title').textContent = '✏️ Modifier l\'événement';
+  document.getElementById('retro-modal-title').textContent = "✏️ Modifier l'événement";
   document.getElementById('rm-label').value       = item.label       || '';
   document.getElementById('rm-date').value        = item.date        || '';
   document.getElementById('rm-heure').value       = item.heure_debut || '';
@@ -2118,7 +2150,6 @@ function saveRetroModal() {
   if (!label || !date) { alert('Libellé et date obligatoires.'); return; }
 
   if (_retroEditSecId && _retroEditItemId) {
-    // Modifier item existant
     const item = findItem(_retroEditSecId, _retroEditItemId);
     if (item) {
       item.label       = label;
@@ -2130,17 +2161,13 @@ function saveRetroModal() {
       item.commentaire = document.getElementById('rm-note').value;
     }
   } else {
-    // Nouvel événement natif → section __retro__
     let retroSec = db.find(s => s.id === RETRO_SEC_ID);
     if (!retroSec) {
       retroSec = { id: RETRO_SEC_ID, name: 'Rétro-Planning', emoji: '🗓️', items: [] };
       db.push(retroSec);
     }
     retroSec.items.push({
-      id:          'r_' + Date.now(),
-      type:        'info',
-      label,
-      date,
+      id: 'r_' + Date.now(), type: 'info', label, date,
       heure_debut: document.getElementById('rm-heure').value,
       duree:       document.getElementById('rm-duree').value,
       responsable: document.getElementById('rm-responsable').value,
@@ -2152,141 +2179,7 @@ function saveRetroModal() {
   }
   save(); pushToSheets();
   closeRetroModal();
-  renderRetro();
-}
-
-
-// ── VUE AGENDA JOUR ──
-let _agendaDate = null; // dateStr actif en vue jour
-
-function renderAgendaDay(dateStr) {
-  _agendaDate = dateStr;
-  const wrap = document.getElementById('view-retro');
-  if (!wrap) return;
-
-  const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-  const MOIS  = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  const d = new Date(dateStr + 'T12:00:00');
-  const isWedding = dateStr === '2026-06-27';
-
-  const events = getRetroEvents().filter(ev => ev.date && ev.date.substring(0,10) === dateStr);
-  const allDay  = events.filter(ev => !ev.heure_debut);
-  const timed   = events.filter(ev => ev.heure_debut);
-
-  // Indexer les événements horodatés par heure de début (HH)
-  const byHour = {};
-  timed.forEach(ev => {
-    const hh = parseInt(ev.heure_debut.split(':')[0], 10);
-    const mm = parseInt(ev.heure_debut.split(':')[1] || '0', 10);
-    const key = hh + (mm >= 30 ? 0.5 : 0);
-    if (!byHour[key]) byHour[key] = [];
-    byHour[key].push(ev);
-  });
-
-  // Plage horaire : 08:00 → 23:00, pas 30 min
-  const START_H = 8, END_H = 23;
-  const slots = [];
-  for (let h = START_H; h <= END_H; h++) {
-    slots.push({ h, m: 0, key: h });
-    if (h < END_H) slots.push({ h, m: 30, key: h + 0.5 });
-  }
-
-  // Ligne "maintenant" (si aujourd'hui)
-  const now = new Date();
-  const todayStr = now.toISOString().substring(0,10);
-  const isToday  = dateStr === todayStr;
-  const nowKey   = isToday ? now.getHours() + (now.getMinutes() >= 30 ? 0.5 : 0) : null;
-
-  // Titre
-  const titleClass = isWedding ? 'agenda-day-title wedding' : 'agenda-day-title';
-  const titleStr = `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]} ${d.getFullYear()}`;
-
-  let html = `<div class="agenda-wrap">
-    <div class="agenda-topbar">
-      <button class="btn-agenda-back" onclick="renderRetro()">← Retour</button>
-      <span class="${titleClass}">${isWedding ? '💒 ' : ''}${titleStr}</span>
-      ${isEditor() ? `<button class="btn-retro-add" onclick="openRetroModal()">+ Événement</button>` : ''}
-    </div>`;
-
-  // Événements toute la journée
-  if (allDay.length) {
-    html += `<div style="margin-bottom:10px">`;
-    allDay.forEach(ev => { html += retroAlldayHtml(ev); });
-    html += `</div>`;
-  }
-
-  html += `<div class="agenda-grid" id="agenda-grid">`;
-
-  slots.forEach(slot => {
-    const isHalfHour = slot.m === 30;
-    const evts = byHour[slot.key] || [];
-    const hasEvt = evts.length > 0;
-    const isNowRow = nowKey !== null && slot.key === nowKey;
-
-    html += `<div class="agenda-row${isHalfHour ? ' half-hour' : ''}${hasEvt ? ' has-event' : ''}" id="agenda-slot-${slot.key}">`;
-
-    // Heure
-    const hStr = String(slot.h).padStart(2,'0') + ':' + String(slot.m).padStart(2,'0');
-    html += `<div class="agenda-hour">${hStr}</div>`;
-
-    // Slot
-    html += `<div class="agenda-slot">`;
-
-    if (isNowRow) {
-      html += `<div class="agenda-now-line"><div class="agenda-now-dot"></div></div>`;
-    }
-
-    evts.forEach(ev => {
-      const mapsUrl = ev.adresse ? `https://maps.google.com/?q=${encodeURIComponent(ev.adresse)}` : '';
-      const cardClass = ev._native ? 'agenda-event-card native' : 'agenda-event-card';
-      const dureeStr = ev.duree ? `⏱ ${ev.duree} min` : '';
-      html += `
-        <div class="${cardClass}" onclick="toggleAgendaExpand('${ev.id}')">
-          <div class="agenda-card-label">
-            <span>${ev._secEmoji}</span>
-            <span>${ev.label}</span>
-            ${isEditor() ? `<span onclick="event.stopPropagation();openRetroEdit('${ev._secId}','${ev.id}')" style="margin-left:auto;font-size:12px;opacity:0.7">✏️</span>` : ''}
-          </div>
-          <div class="agenda-card-meta">
-            ${ev.heure_debut ? `<span>${ev.heure_debut}${ev.duree ? ' · '+ev.duree+' min' : ''}</span>` : ''}
-            ${ev.responsable ? `<span>👤 ${ev.responsable}</span>` : ''}
-            ${ev.adresse ? `<span><a href="${mapsUrl}" target="_blank" onclick="event.stopPropagation()" style="color:rgba(255,255,255,0.9)">📍 ${ev.adresse}</a></span>` : ''}
-          </div>
-        </div>
-        <div class="agenda-event-expand" id="agenda-exp-${ev.id}">
-          ${ev.commentaire ? `<p class="agenda-expand-note">${ev.commentaire}</p>` : ''}
-          <div class="agenda-expand-fields">
-            <div class="agenda-expand-field"><span class="agenda-expand-label">Section</span><span style="font-size:12px;color:var(--text-mid)">${ev._secEmoji} ${ev._secName}</span></div>
-            ${ev.lien ? `<div class="agenda-expand-field"><span class="agenda-expand-label">Lien</span><a href="${ev.lien}" target="_blank" style="font-size:12px;color:var(--terra)">${ev.lien}</a></div>` : ''}
-          </div>
-        </div>`;
-    });
-
-    html += `</div></div>`;
-  });
-
-  html += `</div></div>`;
-  wrap.innerHTML = html;
-
-  // Scroll vers premier événement ou maintenant
-  setTimeout(() => {
-    let target = null;
-    if (isToday && nowKey) target = document.getElementById('agenda-slot-' + nowKey);
-    if (!target && timed.length) {
-      const firstKey = Math.min(...timed.map(ev => {
-        const hh = parseInt(ev.heure_debut.split(':')[0],10);
-        const mm = parseInt(ev.heure_debut.split(':')[1]||'0',10);
-        return hh + (mm>=30?0.5:0);
-      }));
-      target = document.getElementById('agenda-slot-' + firstKey);
-    }
-    (target || document.getElementById('agenda-grid'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 80);
-}
-
-function toggleAgendaExpand(id) {
-  const el = document.getElementById('agenda-exp-' + id);
-  if (el) el.classList.toggle('open');
+  renderAgendaDay(_agendaDate || date);
 }
 
 // ── BUDGET ──
