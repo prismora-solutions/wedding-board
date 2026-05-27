@@ -828,9 +828,8 @@ input[type="date"].has-val::-webkit-datetime-edit { color: var(--text); }
 .retro-modal-field { display: flex; flex-direction: column; gap: 4px; }
 .retro-modal-field.full { grid-column: 1 / -1; }
 .retro-modal-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); }
-.retro-modal-input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; color: var(--text); background: white; width: 100%; box-sizing: border-box; color-scheme: light; }
+.retro-modal-input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; color: var(--text); background: white; width: 100%; box-sizing: border-box; }
 .retro-modal-input:focus { outline: none; border-color: var(--terra-soft); }
-input[type="date"], input[type="time"] { color: var(--text); color-scheme: light; }
 .retro-modal-actions { display: flex; gap: 10px; margin-top: 16px; justify-content: flex-end; }
 .btn-retro-confirm { padding: 9px 20px; background: var(--terra); color: white; border: none; border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
 .btn-retro-cancel { padding: 9px 20px; background: transparent; color: var(--text-soft); border: 1px solid var(--border); border-radius: 20px; font-family: 'Jost', sans-serif; font-size: 13px; cursor: pointer; }
@@ -2231,12 +2230,12 @@ function buildMonth(events) {
   let cells = '';
   // Jours précédents
   for (let i=0; i<startDow; i++) {
-    const d = new Date(year, month, 1-startDow+i, 12, 0, 0);
+    const d = new Date(year, month, 1-startDow+i);
     cells += monthCell(d, byDay, todayStr, weddingStr, true);
   }
   // Jours du mois
   for (let i=1; i<=lastDay.getDate(); i++) {
-    const d = new Date(year, month, i, 12, 0, 0);
+    const d = new Date(year, month, i);
     const inRange = d >= RETRO_GLOBAL_START && d <= RETRO_GLOBAL_END;
     cells += monthCell(d, byDay, todayStr, weddingStr, false, !inRange);
   }
@@ -2244,7 +2243,7 @@ function buildMonth(events) {
   const total = startDow + lastDay.getDate();
   const remaining = (7 - (total%7)) % 7;
   for (let i=1; i<=remaining; i++) {
-    const d = new Date(year, month+1, i, 12, 0, 0);
+    const d = new Date(year, month+1, i);
     cells += monthCell(d, byDay, todayStr, weddingStr, true);
   }
 
